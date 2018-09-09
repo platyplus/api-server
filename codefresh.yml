@@ -1,0 +1,23 @@
+version: '1.0'
+steps:
+ BuildingDockerImage:
+    title: Building Docker Image
+    type: build
+    image_name: platyplus-codefresh/graphql-server
+    working_directory: ./
+    tag: ${{CF_BRANCH_TAG_NORMALIZED}}
+    dockerfile: Dockerfile
+ StoreChart:
+    title: Storing Helm Chart
+    image: 'codefresh/cfstep-helm:2.9.1'
+    environment:
+     - ACTION=push
+     - CHART_REF=charts/graphql-server
+DeployChart:
+    image: 'codefresh/cfstep-helm:2.9.1'
+    environment:
+     - CHART_REF=charts/graphql-server
+     # - RELEASE_NAME=graphql-server-chart-prod
+     - KUBE_CONTEXT=main
+     - VALUE_image_pullPolicy=Always
+     - VALUE_image_tag=${{CF_BRANCH_TAG_NORMALIZED}}

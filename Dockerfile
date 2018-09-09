@@ -18,7 +18,7 @@ RUN npm test
 
 FROM node AS runner
 
-EXPOSE 3000
+EXPOSE 5000
 WORKDIR /app
 
 # Adding production dependencies to image
