@@ -12,11 +12,11 @@ steps:
     image: 'codefresh/cfstep-helm:2.9.1'
     environment:
      - ACTION=push
-     - CHART_REF=.
+     - CHART_REF=drafts/javascript
   DeployChart:
     image: 'codefresh/cfstep-helm:2.9.1'
     environment:
-     - CHART_REF=.
+     - CHART_REF=drafts/javascript
      # - RELEASE_NAME=graphql-server-chart-prod
      - KUBE_CONTEXT=main
      - VALUE_image_pullPolicy=Always
