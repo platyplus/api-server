@@ -4,7 +4,7 @@
 replicaCount: 1
 image:
   pullPolicy: IfNotPresent
-  repository: r.cfcr.io/plmercereau/platyplus/graphql-server
+  repository: r.cfcr.io/plmercereau/platyplus-codefresh/graphql-server
 #  tag: master
 service:
   name: graphql-server
