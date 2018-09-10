@@ -23,7 +23,7 @@ ingress:
     kubernetes.io/tls-acme: "true"
   path: /
   hosts:
-    - graphql.platyplus.io
+  - graphql.platyplus.io
   tls:
-    - hosts:
-      - graphql.platyplus.io
+  - hosts:
+    - graphql.platyplus.io
