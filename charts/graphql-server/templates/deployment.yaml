@@ -22,4 +22,4 @@ spec:
         ports:
         - containerPort: {{ .Values.service.internalPort }}
         resources:
-  {{ toYaml .Values.resources | indent 12 }}
+{{ toYaml .Values.resources | indent 12 }}

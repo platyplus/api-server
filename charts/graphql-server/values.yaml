@@ -5,6 +5,7 @@ replicaCount: 1
 image:
   pullPolicy: IfNotPresent
   repository: r.cfcr.io/plmercereau/platyplus-codefresh/graphql-server
+#  tag: master
 service:
   name: graphql-server
   type: ClusterIP
@@ -22,7 +23,6 @@ ingress:
   annotations:
     kubernetes.io/ingress.class: nginx
     kubernetes.io/tls-acme: "true"
-  path: /
   hosts:
   - graphql.platyplus.io
   tls:
