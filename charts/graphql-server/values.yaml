@@ -26,4 +26,4 @@ ingress:
     - graphql.platyplus.io
   tls:
     - hosts:
-        - graphql.platyplus.io
+      - graphql.platyplus.io

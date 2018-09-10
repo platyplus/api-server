@@ -1,4 +1,4 @@
-name: graphql-server
-description: Helm chart for Typescript GraphQL Server
 apiVersion: v1
-version: v0.1.0
+description: Helm chart for Typescript GraphQL Server
+name: graphql-server
+version: v0.1.1
