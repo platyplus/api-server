@@ -4,6 +4,7 @@
 replicaCount: 1
 image:
   pullPolicy: IfNotPresent
+  repository: r.cfcr.io/plmercereau/platyplus-codefresh/graphql-server
 service:
   name: graphql-server
   type: ClusterIP
