@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: {{ .Chart.Name }}
+  name: {{ template "fullname" . }}
   labels:
     draft: {{ default "draft-app" .Values.draft }}
     chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
@@ -13,7 +13,7 @@ spec:
         buildID: {{ .Values.buildID }}
       labels:
         draft: {{ default "draft-app" .Values.draft }}
-        app: {{ .Chart.Name }}
+        app: {{ template "fullname" . }}
     spec:
       containers:
       - name: {{ .Chart.Name }}

@@ -2,7 +2,7 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: {{ .Chart.Name }}
+  name: {{ template "fullname" . }}
   labels:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
 spec:
@@ -12,7 +12,7 @@ spec:
       {{- range .hosts }}
         - {{ . }}
       {{- end }}
-      secretName: {{ .Chart.Name }}-tls
+      secretName: {{ template "fullname" . }}-tls
   {{- end }}
   rules:
   {{- range .Values.ingress.hosts }}
@@ -21,7 +21,7 @@ spec:
         paths:
           - path: {{ .Values.ingress.path }}
             backend:
-              serviceName: {{ .Chart.Name }}
+              serviceName: {{ template "fullname" . }}
               servicePort: {{ .Values.service.externalPort }}
   {{- end }}
 {{- end -}}
