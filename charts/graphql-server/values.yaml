@@ -28,9 +28,3 @@ ingress:
   tls:
   - hosts:
     - graphql.platyplus.io
-#env:
-#  prismaEndPoint: ""
-#  prismaSecret: ""
-#  appSecret: ""
-#  prismaManagementApiSecret: ""
-#  nodeEnv: ""
