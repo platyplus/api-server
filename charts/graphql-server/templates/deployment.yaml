@@ -21,5 +21,16 @@ spec:
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
         - containerPort: {{ .Values.service.internalPort }}
+        env:
+          - name: PRISMA_ENDPOINT
+            value: {{ .Values.env.prismaEndPoint }}
+          - name: PRISMA_SECRET
+            value: {{ .Values.env.prismaSecret }}
+          - name: APP_SECRET
+            value: {{ .Values.env.appSecret }}
+          - name: PRISMA_MANAGEMENT_API_SECRET
+            value: {{ .Values.env.prismaManagementApiSecret }}
+          - name: NODE_ENV
+            value: {{ .Values.env.nodeEnv }}
         resources:
 {{ toYaml .Values.resources | indent 12 }}

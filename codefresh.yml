@@ -7,12 +7,6 @@ steps:
     working_directory: ./
     tag: ${{CF_BRANCH_TAG_NORMALIZED}}
     dockerfile: Dockerfile
-    build_arguments:
-      - PRISMA_ENDPOINT=${{PRISMA_ENDPOINT}}
-      - PRISMA_SECRET=${{PRISMA_SECRET}}
-      - APP_SECRET=${{APP_SECRET}}
-      - PRISMA_MANAGEMENT_API_SECRET=${{PRISMA_MANAGEMENT_API_SECRET}}
-      - NODE_ENV=${{NODE_ENV}}
   StoreChart:
     title: Storing Helm Chart
     image: 'codefresh/cfstep-helm:2.9.1'
@@ -27,3 +21,8 @@ steps:
      - KUBE_CONTEXT=main@platyplus
      - VALUE_image_pullPolicy=Always
      - VALUE_image_tag=${{CF_BRANCH_TAG_NORMALIZED}}
+     - VALUE_env_prismaEndPointT=${{PRISMA_ENDPOINT}}
+     - VALUE_env_prismaSecret=${{PRISMA_SECRET}}
+     - VALUE_env_appSecret=${{APP_SECRET}}
+     - VALUE_env_prismaManagementApiSecret=${{PRISMA_MANAGEMENT_API_SECRET}}
+     - VALUE_env_nodeEnv=${{NODE_ENV}}
