@@ -3,6 +3,7 @@ FROM node:10.0-alpine AS builder
 WORKDIR /app
 # Copying application code
 COPY . /app
+RUN npm set unsafe-perm true
 # Creating tar of productions dependencies
 RUN npm install --production && cp -rp ./node_modules /tmp/node_modules
 # Installing all dependencies
