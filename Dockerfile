@@ -1,3 +1,4 @@
+# TODO https://codefresh.io/docker-tutorial/node_docker_multistage/
 FROM node:8.0-alpine AS builder
 
 WORKDIR /app
@@ -8,7 +9,7 @@ COPY package.json /app
 RUN npm install --production && cp -rp ./node_modules /tmp/node_modules
 
 # Installing all dependencies
-RUN npm install && npm run build
+RUN npm install
 
 # Copying application code
 COPY . /app
@@ -27,4 +28,4 @@ COPY --from=builder /tmp/node_modules /app/node_modules
 # Copying application code
 COPY . /app
 
-CMD node dist/index.js
+CMD [ "npm", "start" ]
