@@ -8,7 +8,7 @@ COPY package.json /app
 RUN npm install --production && cp -rp ./node_modules /tmp/node_modules
 
 # Installing all dependencies
-RUN npm install
+RUN npm install && npm run build
 
 # Copying application code
 COPY . /app
@@ -16,7 +16,7 @@ COPY . /app
 # Running tests
 RUN npm test
 
-FROM node AS runner
+FROM node:8.0-alpine AS runner
 
 EXPOSE 5000
 WORKDIR /app
@@ -25,6 +25,7 @@ WORKDIR /app
 COPY --from=builder /tmp/node_modules /app/node_modules
 
 # Copying application code
-COPY . /app
+COPY --from=builder /app/dist /app
+#COPY . /app
 
-CMD npm start
+CMD node index.js
