@@ -1,5 +1,5 @@
 # TODO https://codefresh.io/docker-tutorial/node_docker_multistage/
-FROM node:10.0-alpine AS builder
+FROM node:10.7.0-alpine AS builder
 WORKDIR /app
 # Copying application code
 COPY . /app
@@ -11,11 +11,11 @@ RUN npm install
 # Running tests
 RUN npm test
 
-FROM node:10.0-alpine AS runner
+FROM node:10.7.0-alpine AS runner
 EXPOSE 5000
-WORKDIR /app
+WORKDIR /server
 # Adding production dependencies to image
-COPY --from=builder /tmp/node_modules /app/node_modules
+COPY --from=builder /tmp/node_modules /server/node_modules
 # Copying application code
-COPY --from=builder  /app/dist /app
-CMD node index.js
+COPY --from=builder  /app/dist /server/dist
+CMD node dist/index.js
