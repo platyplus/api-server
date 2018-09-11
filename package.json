@@ -1,6 +1,6 @@
 {
   "name": "graphql-server",
-  "licence": "(MIT OR Apache-2.0)",
+  "licence": "Apache-2.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/platyplus/graphql-server"
