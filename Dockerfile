@@ -9,8 +9,7 @@ COPY package.json /app
 RUN npm install --production && cp -rp ./node_modules /tmp/node_modules
 
 # Installing all dependencies
-RUN npm install
-RUN npm run build
+RUN npm install && npm run build
 
 # Copying application code
 COPY . /app
