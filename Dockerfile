@@ -10,6 +10,7 @@ RUN npm install --production && cp -rp ./node_modules /tmp/node_modules
 
 # Installing all dependencies
 RUN npm install
+RUN npm run build
 
 # Copying application code
 COPY . /app

@@ -7,10 +7,8 @@
     "test": "echo 'tests to be defined'; exit 0",
     "debug": "dotenv -- nodemon -e ts,graphql -x ts-node --inspect src/index.ts",
     "playground": "graphql playground",
-    "postinstall": "tsc",
     "build": "rimraf dist && tsc"
   },
-  "main": "./dist/index.js",
   "dependencies": {
     "bcryptjs": "2.4.3",
     "graphql-yoga": "1.16.2",
