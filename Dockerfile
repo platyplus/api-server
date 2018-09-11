@@ -8,9 +8,9 @@ COPY package.json /app
 RUN npm install --production && cp -rp ./node_modules /tmp/node_modules
 
 # Installing all dependencies
-RUN npm install && npm run build
+RUN npm install && npm run build && cp -rp ./dist /tmp/dist
 
-# Copying application code
+# Copying application code (for testing only)
 COPY . /app
 
 # Running tests
@@ -25,7 +25,7 @@ WORKDIR /app
 COPY --from=builder /tmp/node_modules /app/node_modules
 
 # Copying application code
-COPY --from=builder /app/dist /app
+COPY --from=builder /tmp/dist /app
 #COPY . /app
 
 CMD node index.js
