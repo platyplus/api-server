@@ -15,6 +15,7 @@ FROM node:10.7.0-alpine AS runner
 EXPOSE 5000
 WORKDIR /server
 # Adding production dependencies to image
+COPY . /app
 COPY --from=builder /tmp/node_modules /server/node_modules
 # Copying application code
 COPY --from=builder  /app/dist /server/dist
