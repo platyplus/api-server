@@ -1,9 +1,11 @@
 import { GraphQLServer } from 'graphql-yoga'
 import { Prisma } from './generated/prisma'
 import resolvers from './resolvers'
-
+import * as fs from 'fs'
+const schema = 'schema.graphql'
+const typeDefs = fs.existsSync(`./dist/${schema}`) ? `./dist/${schema}` : `./src/${schema}` // TODO dirty workaround
 const server = new GraphQLServer({
-  typeDefs: './src/schema.graphql',
+  typeDefs,
   resolvers,
   context: req => ({
     ...req,
