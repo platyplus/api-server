@@ -4,8 +4,7 @@
     "moduleResolution": "node",
     "module": "commonjs",
     "sourceMap": true,
-    "rootDir": "src",
-    "outDir": "dist",
+    "outDir": "../dist",
     "lib": [
       "esnext", "dom"
     ]
