@@ -1,14 +1,12 @@
 # TODO https://codefresh.io/docker-tutorial/node_docker_multistage/
 FROM node:10.0-alpine AS builder
 WORKDIR /app
-COPY package.json /app
-COPY tsconfig.json /app
+# Copying application code
+COPY . /app
 # Creating tar of productions dependencies
 RUN npm install --production && cp -rp ./node_modules /tmp/node_modules
 # Installing all dependencies
 RUN npm install
-# Copying application code (for test only)
-COPY . /app
 # Running tests
 RUN npm test
 
