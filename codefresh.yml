@@ -22,6 +22,7 @@ steps:
      - VALUE_image_pullPolicy=Always
      - VALUE_image_tag=${{CF_BRANCH_TAG_NORMALIZED}}
      - VALUE_env_prismaServer=${{PRISMA_SERVER}}
+     - VALUE_env_prismaPort=${{PRISMA_PORT}}
      - VALUE_env_prismaService=${{PRISMA_SERVICE}}
      - VALUE_env_prismaStage=${{PRISMA_STAGE}}
      - VALUE_env_prismaSecret=${{PRISMA_SECRET}}

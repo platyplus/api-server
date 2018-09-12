@@ -24,6 +24,8 @@ spec:
         env:
           - name: PRISMA_SERVER
             value: {{ .Values.env.prismaServer }}
+          - name: PRISMA_PORT
+            value: {{ .Values.env.prismaPort }}
           - name: PRISMA_SERVICE
             value: {{ .Values.env.prismaService }}
           - name: PRISMA_STAGE
