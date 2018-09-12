@@ -21,6 +21,7 @@ steps:
      - KUBE_CONTEXT=main@platyplus
      - VALUE_image_pullPolicy=Always
      - VALUE_image_tag=${{CF_BRANCH_TAG_NORMALIZED}}
+     - VALUE_env_prismaProtocol=${{PRISMA_PROTOCOL}}
      - VALUE_env_prismaServer=${{PRISMA_SERVER}}
      - VALUE_env_prismaPort=${{PRISMA_PORT}}
      - VALUE_env_prismaService=${{PRISMA_SERVICE}}

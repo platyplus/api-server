@@ -22,6 +22,8 @@ spec:
         ports:
         - containerPort: {{ .Values.service.internalPort }}
         env:
+          - name: PRISMA_PROTOCOL
+            value: {{ .Values.env.prismaProtocol }}
           - name: PRISMA_SERVER
             value: "{{ .Values.env.prismaServer }}"
           - name: PRISMA_PORT

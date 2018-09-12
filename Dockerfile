@@ -1,4 +1,4 @@
-# TODO https://codefresh.io/docker-tutorial/node_docker_multistage/
+# https://codefresh.io/docker-tutorial/node_docker_multistage/
 # TODO (DOCKER ENTRYPOINT?) prisma deploy, generate, seed...
 # TODO hide prisma server to the external world :)
 # TODO https://stackoverflow.com/questions/44140593/kubernetes-run-command-after-initialization
