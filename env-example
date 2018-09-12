@@ -1,4 +1,6 @@
 PRISMA_SERVER="prisma.platyplus.io"
+PRISMA_PROTOCOL="https"
+PRISMA_PORT="443"
 PRISMA_SERVICE="graphql"
 PRISMA_STAGE="dev"
 PRISMA_SECRET="secret-to-generate-jwt-prisma-server"
