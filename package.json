@@ -12,7 +12,7 @@
     "test": "echo 'tests to be defined'; exit 0",
     "debug": "dotenv -- nodemon -e ts,graphql -x ts-node --inspect src/index.ts",
     "playground": "graphql playground",
-    "build": "tsc"
+    "build": "rimraf dist && tsc"
   },
   "dependencies": {
     "bcryptjs": "2.4.3",
