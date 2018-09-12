@@ -20,7 +20,8 @@ COPY . .
 RUN npm test
 
 FROM base AS release
-COPY --from=dependencies /root/chat/prod_node_modules ./node_modules
+COPY --from=dependencies /root/app/prod_node_modules ./node_modules
 COPY . .
+RUN npm build
 EXPOSE 5000
 CMD npm run start
