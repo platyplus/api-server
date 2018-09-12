@@ -4,20 +4,23 @@
 # TODO https://stackoverflow.com/questions/44140593/kubernetes-run-command-after-initialization
 # TODO https://github.com/helm/helm/blob/master/docs/charts_hooks.md
 # TODO revoir les noms des charts et releases
-FROM node:10.7.0-alpine
-WORKDIR /app
-# Copying application code
-COPY . /app
-RUN npm set unsafe-perm true
-# Creating tar of productions dependencies
-#RUN npm install --production && cp -rp ./node_modules /tmp/node_modules
-# Installing all dependencies
+FROM node:10.7.0-alpine as base
+WORKDIR /root/app
+COPY package.json .
+
+FROM base AS dependencies
+RUN npm set progress=false && npm set unsafe-perm true && npm config set depth 0
+RUN npm install --only=production
+RUN cp -R node_modules prod_node_modules
 RUN npm install
-# Running tests
+
+FROM dependencies AS test
+COPY . .
+#RUN  npm run lint && npm run setup && npm run test
 RUN npm test
 
+FROM base AS release
+COPY --from=dependencies /root/chat/prod_node_modules ./node_modules
+COPY . .
 EXPOSE 5000
-#COPY --from=builder /tmp/node_modules /server/node_modules
-# Copying application code
-#COPY --from=builder  /app/dist /server/dist
-CMD node dist/index.js
+CMD npm run start

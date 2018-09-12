@@ -3,3 +3,4 @@ version: v0.1.2
 kubeVersion: "^1.8.0-0"
 description: Helm chart for Typescript GraphQL Server
 name: graphql-server
+icon: https://graphql.org/img/logo.svg
