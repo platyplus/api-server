@@ -1,5 +1,6 @@
-PRISMA_ENDPOINT="https://prisma.platyplus.io/graphql-server"
+PRISMA_SERVER="prisma.platyplus.io"
+PRISMA_SERVICE="graphql"
+PRISMA_STAGE="dev"
 PRISMA_SECRET="secret-to-generate-jwt-prisma-server"
 APP_SECRET="secret-to-access-graphql-server"
 PRISMA_MANAGEMENT_API_SECRET="prisma-management-secret-to-administrate-prisma-server"
-
