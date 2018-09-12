@@ -19,7 +19,9 @@ COPY . .
 #RUN  npm run lint && npm run setup && npm run test
 RUN npm test
 
-FROM dependencies AS build
+FROM base AS build
+RUN npm set progress=false && npm set unsafe-perm true && npm config set depth 0
+RUN npm install
 COPY . .
 RUN npm run build
 
