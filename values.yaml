@@ -1,7 +1,7 @@
 replicaCount: 1
 image:
   pullPolicy: IfNotPresent
-  repository: r.cfcr.io/plmercereau/platyplus-codefresh/graphql-server
+  repository: r.cfcr.io/plmercereau/default/graphql-server
 service:
   name: graphql-server
   type: ClusterIP
@@ -24,3 +24,4 @@ ingress:
   tls:
   - hosts:
     - graphql.platyplus.io
+basedomain: platyplus.io
