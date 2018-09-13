@@ -22,45 +22,45 @@ spec:
         ports:
         - containerPort: {{ .Values.service.internalPort }}
         env:
-        - name: PRISMA_PROTOCOL
-          valueFrom:
-            configMapKeyRef:
-              name: {{ .Values.prismaServer }}
-              key: protocol
-        - name: PRISMA_SERVER
-          valueFrom:
-            configMapKeyRef:
-              name: {{ .Values.prismaServer }}
-              key: server
-        - name: PRISMA_PORT
-          valueFrom:
-            configMapKeyRef:
-              name: {{ .Values.prismaServer }}
-              key: port
-        - name: PRISMA_SERVICE
-          valueFrom:
-            configMapKeyRef:
-              name: {{ template "fullname" . }}
-              key: service
-        - name: PRISMA_STAGE
-          valueFrom:
-            configMapKeyRef:
-              name: {{ template "fullname" . }}
-              key: stage
-        - name: PRISMA_SECRET
-          valueFrom:
-            secretKeyRef:
-              name: {{ template "fullname" . }}-secret
-              key: prismaSecret
-        - name: APP_SECRET
-          valueFrom:
-            secretKeyRef:
-              name: {{ template "fullname" . }}-secret
-              key: appSecret
-        - name: PRISMA_MANAGEMENT_API_SECRET
-          valueFrom:
-            secretKeyRef:
-              name: {{ .Values.prismaServer }}-secret
-              key: secret
+          - name: PRISMA_PROTOCOL
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Values.prismaServer }}
+                key: protocol
+          - name: PRISMA_SERVER
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Values.prismaServer }}
+                key: server
+          - name: PRISMA_PORT
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Values.prismaServer }}
+                key: port
+          - name: PRISMA_SERVICE
+            valueFrom:
+              configMapKeyRef:
+                name: {{ template "fullname" . }}
+                key: service
+          - name: PRISMA_STAGE
+            valueFrom:
+              configMapKeyRef:
+                name: {{ template "fullname" . }}
+                key: stage
+          - name: PRISMA_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "fullname" . }}-secret
+                key: prismaSecret
+          - name: APP_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "fullname" . }}-secret
+                key: appSecret
+          - name: PRISMA_MANAGEMENT_API_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.prismaServer }}-secret
+                key: secret
         resources:
 {{ toYaml .Values.resources | indent 12 }}
