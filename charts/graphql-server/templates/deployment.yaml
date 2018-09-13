@@ -21,22 +21,51 @@ spec:
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
         - containerPort: {{ .Values.service.internalPort }}
+        envFrom:
+        - configMapRef:
+            name: {{ template "fullname" . }}
+        - configMapRef:
+            name: {{ .Values.prismaServer }}
         env:
           - name: PRISMA_PROTOCOL
-            value: {{ .Values.env.prismaProtocol }}
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Values.prismaServer }}
+                key: protocol
           - name: PRISMA_SERVER
-            value: "{{ .Values.env.prismaServer }}"
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Values.prismaServer }}
+                key: server
           - name: PRISMA_PORT
-            value: "{{ .Values.env.prismaPort }}"
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Values.prismaServer }}
+                key: port
           - name: PRISMA_SERVICE
-            value: {{ .Values.env.prismaService }}
+            valueFrom:
+              configMapKeyRef:
+                name: {{ template "fullname" . }}
+                key: service
           - name: PRISMA_STAGE
-            value: {{ .Values.env.prismaStage }}
+            valueFrom:
+              configMapKeyRef:
+                name: {{ template "fullname" . }}
+                key: stage
           - name: PRISMA_SECRET
-            value: {{ .Values.env.prismaSecret }}
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "fullname" . }}-secret
+                key: prismaSecret
           - name: APP_SECRET
-            value: {{ .Values.env.appSecret }}
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "fullname" . }}-secret
+                key: appSecret
           - name: PRISMA_MANAGEMENT_API_SECRET
-            value: {{ .Values.env.prismaManagementApiSecret }}
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.prismaServer }}-secret
+                key: secret
         resources:
 {{ toYaml .Values.resources | indent 12 }}

@@ -1,8 +1,10 @@
-PRISMA_SERVER="prisma.platyplus.io"
+PRISMA_MANAGEMENT_API_SECRET="anothersecret"
+
+PRISMA_SECRET="asecret="
+APP_SECRET="onemoresecret"
+
+PRISMA_SERVER="server.com"
 PRISMA_PROTOCOL="https"
 PRISMA_PORT="443"
 PRISMA_SERVICE="graphql"
-PRISMA_STAGE="dev"
-PRISMA_SECRET="secret-to-generate-jwt-prisma-server"
-APP_SECRET="secret-to-access-graphql-server"
-PRISMA_MANAGEMENT_API_SECRET="prisma-management-secret-to-administrate-prisma-server"
+PRISMA_STAGE=dev

@@ -1,19 +1,36 @@
-# TODO
-## Environment variables in Codefresh pipeline
+# https://codefresh.io/docker-tutorial/node_docker_multistage/
+# TODO (DOCKER ENTRYPOINT?) prisma deploy, generate, seed... NON car pas idempotent
+# TODO https://stackoverflow.com/questions/44140593/kubernetes-run-command-after-initialization
+# TODO https://github.com/helm/helm/blob/master/docs/charts_hooks.md
 
-# Summary
+# Local / development
 ## Requirements
-
+TODO check
 You need to have the [GraphQL CLI](https://github.com/graphql-cli/graphql-cli) installed to bootstrap your GraphQL server using `graphql create`:
 
 ```sh
 npm install -g graphql-cli
 ```
 
+## Install dependencies
+```sh
+yarn install
+```
+
 ## Commands
 
-* `yarn start` starts GraphQL server on `http://localhost:4000`
+* `yarn start-dev` starts GraphQL server on `http://localhost:4000`
 * `yarn dev` starts GraphQL server on `http://localhost:4000` _and_ opens GraphQL Playground
 * `yarn playground` opens the GraphQL Playground for the `projects` from [`.graphqlconfig.yml`](./.graphqlconfig.yml)
 * `yarn prisma <subcommand>` gives access to local version of Prisma CLI (e.g. `yarn prisma deploy`)
 
+# Production
+## Set a Kubernetes environment
+TODO see kubernetes-config
+## Deploy a Prisma server on Kubernetes
+TODO
+## CI/CD with CodeFresh
+### Create a repository
+### Create a pipeline
+### Trigger
+### Environment variables in Codefresh pipeline
