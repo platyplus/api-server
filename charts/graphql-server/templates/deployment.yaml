@@ -21,11 +21,6 @@ spec:
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
         - containerPort: {{ .Values.service.internalPort }}
-        envFrom:
-        - configMapRef:
-            name: {{ template "fullname" . }}
-        - configMapRef:
-            name: {{ .Values.prismaServer }}
         env:
           - name: PRISMA_PROTOCOL
             valueFrom:
