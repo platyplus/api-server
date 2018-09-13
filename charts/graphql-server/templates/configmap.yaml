@@ -8,4 +8,4 @@ metadata:
 data:
   server: {{ .Values.prismaServer }}
   service: {{ template "fullname" . }}
-  stage: {{ default "production" .Values.prismaServer }}
+  stage: {{ default "production" .Values.prismaStage }}
