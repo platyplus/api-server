@@ -26,4 +26,3 @@ steps:
      - VALUE_prismaStage=${{PRISMA_STAGE}}
      - VALUE_prismaSecret=${{PRISMA_SECRET}}
      - VALUE_appSecret=${{APP_SECRET}}
-     - VALUE_prisma_service_secret=${{PRISMA_MANAGEMENT_API_SECRET}}

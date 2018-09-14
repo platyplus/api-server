@@ -25,18 +25,3 @@ ingress:
   - hosts:
     - graphql.platyplus.io
 basedomain: platyplus.io
-prisma:
-#  TODO
-  enabled: true
-  imagePullPolicy: "IfNotPresent"
-  nameOverride: prisma
-  database:
-    connector: postgres
-    name: prisma
-    user: postgres
-    password: "Q/KARXveNYi8txbWFxbzfj+PN2SwU20MvxEYOIwNSZf/SiXyuH5y5xlrxpcbx1SrxogmgyueBhSgUqET/VzrGp4j1l4/6/mM9OLSc4zaR3rdMSUU9ZzRZW5xHWHP/Ceyhjx8CEptaAlAqexD8WDWaWiSj1NZZgb5FQClKb3rakk="
-    host: "127.0.0.1"
-    port: "5432"
-    googleCloudSQL:
-      enabled: true
-      host: "platyplus-0402:europe-west1:prisma-prod"
