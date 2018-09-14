@@ -1,7 +1,10 @@
-# https://codefresh.io/docker-tutorial/node_docker_multistage/
-# TODO (DOCKER ENTRYPOINT?) prisma deploy, generate, seed... NON car pas idempotent
-# TODO https://stackoverflow.com/questions/44140593/kubernetes-run-command-after-initialization
-# TODO https://github.com/helm/helm/blob/master/docs/charts_hooks.md
+# GraphQL Server
+[![Codefresh build status]( https://g.codefresh.io/api/badges/pipeline/plmercereau/platyplus%2Fgraphql-server%2Fgraphql-server?branch=master&key=eyJhbGciOiJIUzI1NiJ9.NWI5M2U0MGQwNTdiOGUwMDAxZmFkMjgx.OXdTB7Vte67YoKtDo9yes3tLkr8usTBnsY7t8HtTkyg&type=cf-1)]( https://g.codefresh.io/repositories/platyplus/graphql-server/builds?filter=trigger:build;branch:master;service:5b9573c4e885213f997ababe~graphql-server)
+
+- https://codefresh.io/docker-tutorial/node_docker_multistage/
+- TODO (DOCKER ENTRYPOINT?) prisma deploy, generate, seed... NON car pas idempotent
+- TODO https://stackoverflow.com/questions/44140593/kubernetes-run-command-after-initialization
+- TODO https://github.com/helm/helm/blob/master/docs/charts_hooks.md
 
 # Local / development
 ## Requirements

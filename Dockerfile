@@ -1,4 +1,5 @@
 FROM node:10.7.0-alpine as base
+#USER node
 WORKDIR /root/app
 COPY package.json .
 
