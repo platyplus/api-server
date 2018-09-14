@@ -1,5 +1,5 @@
 dependencies:
 - name: prisma
   version: ~0.1.0
-  repository: "https://h.cfcr.io/plmercereau/default/"
+  repository: https://h.cfcr.io/plmercereau/platyplus
   condition: prisma.enabled
