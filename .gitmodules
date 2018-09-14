@@ -1,0 +1,3 @@
+[submodule "charts/prisma"]
+	path = charts/prisma
+	url = https://github.com/platyplus/prisma
