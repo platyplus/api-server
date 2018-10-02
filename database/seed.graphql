@@ -1,20 +1,27 @@
 mutation {
-  createUser(data: {
-    email: "developer@example.com"
+  pilou:createUser(data: {
+    login: "pilou@pilou.com"
     password: "$2a$10$hACwQ5/HQI6FhbIISOUVeusy3sKyUDhSq36fF5d/54aAdiygJPFzm" # plaintext password: "nooneknows"
-    name: "Sarah"
+    name: "Pilou"
+    role: ADMIN
     posts: {
       create: [{
         title: "Hello World 👋"
         text: "I like turtles."
         isPublished: true
-      }, {
-        title: "Join us at GraphQL Europe 🇪🇺 "
-        text: "Get a 10%-discount with this promo code on graphql-europe.org: gql-boilerplates"
-        isPublished: true
-      }, {
-        title: "Solving world hunger"
-        text: "This is a draft..."
+      }]
+    }
+  }) {
+    id
+  }
+  rosalie:createUser(data: {
+    login: "rosalie@pilou.com"
+    password: "$2a$10$hACwQ5/HQI6FhbIISOUVeusy3sKyUDhSq36fF5d/54aAdiygJPFzm" # plaintext password: "nooneknows"
+    name: "Rosalie"
+    posts: {
+      create: [{
+        title: "Un billet magnifique"
+        text: "J'aime bien mon prénom"
         isPublished: false
       }]
     }

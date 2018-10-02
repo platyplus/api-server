@@ -1,15 +1,22 @@
 # import Post from "./generated/prisma.graphql"
+# directive @isAuthenticated on FIELD | FIELD_DEFINITION
+directive @hasRole(roles: [String]) on QUERY | FIELD | MUTATION
 
 type Query {
   feed: [Post!]!
   drafts: [Post!]!
   post(id: ID!): Post
+  users(login: String): [User!]! @hasRole(roles: ["ADMIN"])
+  # TODO revoir les droits d'acces: ADMIN || (HOST_SERVICE && login == user.login)
+  # @hasRole(roles: ["ADMIN", "HOST_SERVICE"])
+  hostSettings(login: String!): String!
   me: User
 }
 
 type Mutation {
-  signup(email: String!, password: String!, name: String!): AuthPayload!
-  login(email: String!, password: String!): AuthPayload!
+  signup(login: String!, password: String!, name: String!): AuthPayload!
+  createUser(login: String!, password: String!, name: String!, role:Role, publicKey:String, timeZone:String): AuthPayload! @hasRole(roles: ["ADMIN"])
+  signin(login: String!, password: String!): AuthPayload!
   createDraft(title: String!, text: String!): Post!
   publish(id: ID!): Post!
   deletePost(id: ID!): Post!
@@ -26,7 +33,11 @@ type AuthPayload {
 
 type User {
   id: ID!
-  email: String!
+  login: String!
+  role: String!
   name: String!
+  publicKey: String
+  tunnelPort: Int
+  timeZone: String
   posts: [Post!]!
 }

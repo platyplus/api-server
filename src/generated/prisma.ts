@@ -130,7 +130,7 @@ type Post implements Node {
   isPublished: Boolean!
   title: String!
   text: String!
-  author(where: UserWhereInput): User!
+  author: User!
 }
 
 """A connection to a list of items."""
@@ -237,7 +237,7 @@ input PostUpdateInput {
   isPublished: Boolean
   title: String
   text: String
-  author: UserUpdateOneWithoutPostsInput
+  author: UserUpdateOneRequiredWithoutPostsInput
 }
 
 input PostUpdateManyWithoutAuthorInput {
@@ -465,6 +465,12 @@ type Query {
   ): Node
 }
 
+enum Role {
+  ADMIN
+  HOST_SERVICE
+  USER
+}
+
 type Subscription {
   post(where: PostSubscriptionWhereInput): PostSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
@@ -472,9 +478,13 @@ type Subscription {
 
 type User implements Node {
   id: ID!
-  email: String!
-  password: String!
+  login: String!
   name: String!
+  password: String!
+  role: Role
+  publicKey: String
+  tunnelPort: Int
+  timeZone: String!
   posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post!]
 }
 
@@ -489,9 +499,13 @@ type UserConnection {
 }
 
 input UserCreateInput {
-  email: String!
-  password: String!
+  login: String!
   name: String!
+  password: String!
+  role: Role
+  publicKey: String
+  tunnelPort: Int
+  timeZone: String
   posts: PostCreateManyWithoutAuthorInput
 }
 
@@ -501,9 +515,13 @@ input UserCreateOneWithoutPostsInput {
 }
 
 input UserCreateWithoutPostsInput {
-  email: String!
-  password: String!
+  login: String!
   name: String!
+  password: String!
+  role: Role
+  publicKey: String
+  tunnelPort: Int
+  timeZone: String
 }
 
 """An edge in a connection."""
@@ -518,12 +536,20 @@ type UserEdge {
 enum UserOrderByInput {
   id_ASC
   id_DESC
-  email_ASC
-  email_DESC
-  password_ASC
-  password_DESC
+  login_ASC
+  login_DESC
   name_ASC
   name_DESC
+  password_ASC
+  password_DESC
+  role_ASC
+  role_DESC
+  publicKey_ASC
+  publicKey_DESC
+  tunnelPort_ASC
+  tunnelPort_DESC
+  timeZone_ASC
+  timeZone_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -532,9 +558,13 @@ enum UserOrderByInput {
 
 type UserPreviousValues {
   id: ID!
-  email: String!
-  password: String!
+  login: String!
   name: String!
+  password: String!
+  role: Role
+  publicKey: String
+  tunnelPort: Int
+  timeZone: String!
 }
 
 type UserSubscriptionPayload {
@@ -577,24 +607,31 @@ input UserSubscriptionWhereInput {
 }
 
 input UserUpdateInput {
-  email: String
-  password: String
+  login: String
   name: String
+  password: String
+  role: Role
+  publicKey: String
+  tunnelPort: Int
+  timeZone: String
   posts: PostUpdateManyWithoutAuthorInput
 }
 
-input UserUpdateOneWithoutPostsInput {
+input UserUpdateOneRequiredWithoutPostsInput {
   create: UserCreateWithoutPostsInput
   connect: UserWhereUniqueInput
-  delete: Boolean
   update: UserUpdateWithoutPostsDataInput
   upsert: UserUpsertWithoutPostsInput
 }
 
 input UserUpdateWithoutPostsDataInput {
-  email: String
-  password: String
+  login: String
   name: String
+  password: String
+  role: Role
+  publicKey: String
+  tunnelPort: Int
+  timeZone: String
 }
 
 input UserUpsertWithoutPostsInput {
@@ -651,86 +688,46 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
-  email: String
+  login: String
 
   """All values that are not equal to given value."""
-  email_not: String
+  login_not: String
 
   """All values that are contained in given list."""
-  email_in: [String!]
+  login_in: [String!]
 
   """All values that are not contained in given list."""
-  email_not_in: [String!]
+  login_not_in: [String!]
 
   """All values less than the given value."""
-  email_lt: String
+  login_lt: String
 
   """All values less than or equal the given value."""
-  email_lte: String
+  login_lte: String
 
   """All values greater than the given value."""
-  email_gt: String
+  login_gt: String
 
   """All values greater than or equal the given value."""
-  email_gte: String
+  login_gte: String
 
   """All values containing the given string."""
-  email_contains: String
+  login_contains: String
 
   """All values not containing the given string."""
-  email_not_contains: String
+  login_not_contains: String
 
   """All values starting with the given string."""
-  email_starts_with: String
+  login_starts_with: String
 
   """All values not starting with the given string."""
-  email_not_starts_with: String
+  login_not_starts_with: String
 
   """All values ending with the given string."""
-  email_ends_with: String
+  login_ends_with: String
 
   """All values not ending with the given string."""
-  email_not_ends_with: String
-  password: String
-
-  """All values that are not equal to given value."""
-  password_not: String
-
-  """All values that are contained in given list."""
-  password_in: [String!]
-
-  """All values that are not contained in given list."""
-  password_not_in: [String!]
-
-  """All values less than the given value."""
-  password_lt: String
-
-  """All values less than or equal the given value."""
-  password_lte: String
-
-  """All values greater than the given value."""
-  password_gt: String
-
-  """All values greater than or equal the given value."""
-  password_gte: String
-
-  """All values containing the given string."""
-  password_contains: String
-
-  """All values not containing the given string."""
-  password_not_contains: String
-
-  """All values starting with the given string."""
-  password_starts_with: String
-
-  """All values not starting with the given string."""
-  password_not_starts_with: String
-
-  """All values ending with the given string."""
-  password_ends_with: String
-
-  """All values not ending with the given string."""
-  password_not_ends_with: String
+  login_not_ends_with: String
   name: String
 
   """All values that are not equal to given value."""
@@ -771,6 +768,158 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   name_not_ends_with: String
+  password: String
+
+  """All values that are not equal to given value."""
+  password_not: String
+
+  """All values that are contained in given list."""
+  password_in: [String!]
+
+  """All values that are not contained in given list."""
+  password_not_in: [String!]
+
+  """All values less than the given value."""
+  password_lt: String
+
+  """All values less than or equal the given value."""
+  password_lte: String
+
+  """All values greater than the given value."""
+  password_gt: String
+
+  """All values greater than or equal the given value."""
+  password_gte: String
+
+  """All values containing the given string."""
+  password_contains: String
+
+  """All values not containing the given string."""
+  password_not_contains: String
+
+  """All values starting with the given string."""
+  password_starts_with: String
+
+  """All values not starting with the given string."""
+  password_not_starts_with: String
+
+  """All values ending with the given string."""
+  password_ends_with: String
+
+  """All values not ending with the given string."""
+  password_not_ends_with: String
+  role: Role
+
+  """All values that are not equal to given value."""
+  role_not: Role
+
+  """All values that are contained in given list."""
+  role_in: [Role!]
+
+  """All values that are not contained in given list."""
+  role_not_in: [Role!]
+  publicKey: String
+
+  """All values that are not equal to given value."""
+  publicKey_not: String
+
+  """All values that are contained in given list."""
+  publicKey_in: [String!]
+
+  """All values that are not contained in given list."""
+  publicKey_not_in: [String!]
+
+  """All values less than the given value."""
+  publicKey_lt: String
+
+  """All values less than or equal the given value."""
+  publicKey_lte: String
+
+  """All values greater than the given value."""
+  publicKey_gt: String
+
+  """All values greater than or equal the given value."""
+  publicKey_gte: String
+
+  """All values containing the given string."""
+  publicKey_contains: String
+
+  """All values not containing the given string."""
+  publicKey_not_contains: String
+
+  """All values starting with the given string."""
+  publicKey_starts_with: String
+
+  """All values not starting with the given string."""
+  publicKey_not_starts_with: String
+
+  """All values ending with the given string."""
+  publicKey_ends_with: String
+
+  """All values not ending with the given string."""
+  publicKey_not_ends_with: String
+  tunnelPort: Int
+
+  """All values that are not equal to given value."""
+  tunnelPort_not: Int
+
+  """All values that are contained in given list."""
+  tunnelPort_in: [Int!]
+
+  """All values that are not contained in given list."""
+  tunnelPort_not_in: [Int!]
+
+  """All values less than the given value."""
+  tunnelPort_lt: Int
+
+  """All values less than or equal the given value."""
+  tunnelPort_lte: Int
+
+  """All values greater than the given value."""
+  tunnelPort_gt: Int
+
+  """All values greater than or equal the given value."""
+  tunnelPort_gte: Int
+  timeZone: String
+
+  """All values that are not equal to given value."""
+  timeZone_not: String
+
+  """All values that are contained in given list."""
+  timeZone_in: [String!]
+
+  """All values that are not contained in given list."""
+  timeZone_not_in: [String!]
+
+  """All values less than the given value."""
+  timeZone_lt: String
+
+  """All values less than or equal the given value."""
+  timeZone_lte: String
+
+  """All values greater than the given value."""
+  timeZone_gt: String
+
+  """All values greater than or equal the given value."""
+  timeZone_gte: String
+
+  """All values containing the given string."""
+  timeZone_contains: String
+
+  """All values not containing the given string."""
+  timeZone_not_contains: String
+
+  """All values starting with the given string."""
+  timeZone_starts_with: String
+
+  """All values not starting with the given string."""
+  timeZone_not_starts_with: String
+
+  """All values ending with the given string."""
+  timeZone_ends_with: String
+
+  """All values not ending with the given string."""
+  timeZone_not_ends_with: String
   posts_every: PostWhereInput
   posts_some: PostWhereInput
   posts_none: PostWhereInput
@@ -778,7 +927,7 @@ input UserWhereInput {
 
 input UserWhereUniqueInput {
   id: ID
-  email: String
+  login: String
 }
 `
 
@@ -787,6 +936,10 @@ export const Prisma = makePrismaBindingClass<BindingConstructor<Prisma>>({typeDe
 /**
  * Types
 */
+
+export type Role =   'ADMIN' |
+  'HOST_SERVICE' |
+  'USER'
 
 export type PostOrderByInput =   'id_ASC' |
   'id_DESC' |
@@ -803,12 +956,20 @@ export type PostOrderByInput =   'id_ASC' |
 
 export type UserOrderByInput =   'id_ASC' |
   'id_DESC' |
-  'email_ASC' |
-  'email_DESC' |
-  'password_ASC' |
-  'password_DESC' |
+  'login_ASC' |
+  'login_DESC' |
   'name_ASC' |
   'name_DESC' |
+  'password_ASC' |
+  'password_DESC' |
+  'role_ASC' |
+  'role_DESC' |
+  'publicKey_ASC' |
+  'publicKey_DESC' |
+  'tunnelPort_ASC' |
+  'tunnelPort_DESC' |
+  'timeZone_ASC' |
+  'timeZone_DESC' |
   'updatedAt_ASC' |
   'updatedAt_DESC' |
   'createdAt_ASC' |
@@ -913,34 +1074,20 @@ export interface UserWhereInput {
   id_not_starts_with?: ID_Input
   id_ends_with?: ID_Input
   id_not_ends_with?: ID_Input
-  email?: String
-  email_not?: String
-  email_in?: String[] | String
-  email_not_in?: String[] | String
-  email_lt?: String
-  email_lte?: String
-  email_gt?: String
-  email_gte?: String
-  email_contains?: String
-  email_not_contains?: String
-  email_starts_with?: String
-  email_not_starts_with?: String
-  email_ends_with?: String
-  email_not_ends_with?: String
-  password?: String
-  password_not?: String
-  password_in?: String[] | String
-  password_not_in?: String[] | String
-  password_lt?: String
-  password_lte?: String
-  password_gt?: String
-  password_gte?: String
-  password_contains?: String
-  password_not_contains?: String
-  password_starts_with?: String
-  password_not_starts_with?: String
-  password_ends_with?: String
-  password_not_ends_with?: String
+  login?: String
+  login_not?: String
+  login_in?: String[] | String
+  login_not_in?: String[] | String
+  login_lt?: String
+  login_lte?: String
+  login_gt?: String
+  login_gte?: String
+  login_contains?: String
+  login_not_contains?: String
+  login_starts_with?: String
+  login_not_starts_with?: String
+  login_ends_with?: String
+  login_not_ends_with?: String
   name?: String
   name_not?: String
   name_in?: String[] | String
@@ -955,6 +1102,60 @@ export interface UserWhereInput {
   name_not_starts_with?: String
   name_ends_with?: String
   name_not_ends_with?: String
+  password?: String
+  password_not?: String
+  password_in?: String[] | String
+  password_not_in?: String[] | String
+  password_lt?: String
+  password_lte?: String
+  password_gt?: String
+  password_gte?: String
+  password_contains?: String
+  password_not_contains?: String
+  password_starts_with?: String
+  password_not_starts_with?: String
+  password_ends_with?: String
+  password_not_ends_with?: String
+  role?: Role
+  role_not?: Role
+  role_in?: Role[] | Role
+  role_not_in?: Role[] | Role
+  publicKey?: String
+  publicKey_not?: String
+  publicKey_in?: String[] | String
+  publicKey_not_in?: String[] | String
+  publicKey_lt?: String
+  publicKey_lte?: String
+  publicKey_gt?: String
+  publicKey_gte?: String
+  publicKey_contains?: String
+  publicKey_not_contains?: String
+  publicKey_starts_with?: String
+  publicKey_not_starts_with?: String
+  publicKey_ends_with?: String
+  publicKey_not_ends_with?: String
+  tunnelPort?: Int
+  tunnelPort_not?: Int
+  tunnelPort_in?: Int[] | Int
+  tunnelPort_not_in?: Int[] | Int
+  tunnelPort_lt?: Int
+  tunnelPort_lte?: Int
+  tunnelPort_gt?: Int
+  tunnelPort_gte?: Int
+  timeZone?: String
+  timeZone_not?: String
+  timeZone_in?: String[] | String
+  timeZone_not_in?: String[] | String
+  timeZone_lt?: String
+  timeZone_lte?: String
+  timeZone_gt?: String
+  timeZone_gte?: String
+  timeZone_contains?: String
+  timeZone_not_contains?: String
+  timeZone_starts_with?: String
+  timeZone_not_starts_with?: String
+  timeZone_ends_with?: String
+  timeZone_not_ends_with?: String
   posts_every?: PostWhereInput
   posts_some?: PostWhereInput
   posts_none?: PostWhereInput
@@ -973,13 +1174,17 @@ export interface PostUpdateInput {
   isPublished?: Boolean
   title?: String
   text?: String
-  author?: UserUpdateOneWithoutPostsInput
+  author?: UserUpdateOneRequiredWithoutPostsInput
 }
 
 export interface UserUpdateInput {
-  email?: String
-  password?: String
+  login?: String
   name?: String
+  password?: String
+  role?: Role
+  publicKey?: String
+  tunnelPort?: Int
+  timeZone?: String
   posts?: PostUpdateManyWithoutAuthorInput
 }
 
@@ -1006,9 +1211,13 @@ export interface UserSubscriptionWhereInput {
 }
 
 export interface UserUpdateWithoutPostsDataInput {
-  email?: String
-  password?: String
+  login?: String
   name?: String
+  password?: String
+  role?: Role
+  publicKey?: String
+  tunnelPort?: Int
+  timeZone?: String
 }
 
 export interface PostWhereUniqueInput {
@@ -1022,22 +1231,29 @@ export interface PostUpsertWithWhereUniqueWithoutAuthorInput {
 }
 
 export interface UserCreateInput {
-  email: String
-  password: String
+  login: String
   name: String
+  password: String
+  role?: Role
+  publicKey?: String
+  tunnelPort?: Int
+  timeZone?: String
   posts?: PostCreateManyWithoutAuthorInput
 }
 
 export interface UserCreateWithoutPostsInput {
-  email: String
-  password: String
+  login: String
   name: String
+  password: String
+  role?: Role
+  publicKey?: String
+  tunnelPort?: Int
+  timeZone?: String
 }
 
-export interface UserUpdateOneWithoutPostsInput {
+export interface UserUpdateOneRequiredWithoutPostsInput {
   create?: UserCreateWithoutPostsInput
   connect?: UserWhereUniqueInput
-  delete?: Boolean
   update?: UserUpdateWithoutPostsDataInput
   upsert?: UserUpsertWithoutPostsInput
 }
@@ -1057,7 +1273,7 @@ export interface PostUpdateWithoutAuthorDataInput {
 
 export interface UserWhereUniqueInput {
   id?: ID_Input
-  email?: String
+  login?: String
 }
 
 export interface PostSubscriptionWhereInput {
@@ -1086,9 +1302,13 @@ export interface Node {
 
 export interface UserPreviousValues {
   id: ID_Output
-  email: String
-  password: String
+  login: String
   name: String
+  password: String
+  role?: Role
+  publicKey?: String
+  tunnelPort?: Int
+  timeZone: String
 }
 
 /*
@@ -1144,9 +1364,13 @@ export interface PostPreviousValues {
 
 export interface User extends Node {
   id: ID_Output
-  email: String
-  password: String
+  login: String
   name: String
+  password: String
+  role?: Role
+  publicKey?: String
+  tunnelPort?: Int
+  timeZone: String
   posts?: Post[]
 }
 
@@ -1194,9 +1418,9 @@ export interface UserConnection {
 }
 
 /*
-The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
+The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
 */
-export type Int = number
+export type String = string
 
 /*
 The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
@@ -1205,9 +1429,9 @@ export type ID_Input = string | number
 export type ID_Output = string
 
 /*
-The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
 */
-export type String = string
+export type Int = number
 
 /*
 The `Long` scalar type represents non-fractional signed whole numeric values.

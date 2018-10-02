@@ -1,5 +1,7 @@
 import * as jwt from 'jsonwebtoken'
-import { Prisma } from './generated/prisma'
+import { Prisma } from '../generated/prisma'
+// import { getIntrospectionQuery } from 'graphql';
+export { GitHub } from './GitHub';
 
 export interface Context {
   db: Prisma
@@ -22,3 +24,4 @@ export class AuthError extends Error {
     super('Not authorized')
   }
 }
+ 

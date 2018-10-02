@@ -1,3 +1,9 @@
+enum Role {
+  ADMIN
+  HOST_SERVICE
+  USER
+}
+
 type Post {
   id: ID! @unique
   createdAt: DateTime!
@@ -10,8 +16,12 @@ type Post {
 
 type User {
   id: ID! @unique
-  email: String! @unique
-  password: String!
+  login: String! @unique
   name: String!
+  password: String!
+  role: Role @default(value: USER)
+  publicKey: String
+  tunnelPort: Int
+  timeZone: String! @default(value: "Europe/Brussels")
   posts: [Post!]!
 }
