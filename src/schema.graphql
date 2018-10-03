@@ -15,7 +15,8 @@ type Query {
 
 type Mutation {
   signup(login: String!, password: String!, name: String!): AuthPayload!
-  createUser(login: String!, password: String!, name: String!, role:Role, publicKey:String, timeZone:String): AuthPayload! @hasRole(roles: ["ADMIN"])
+  # createHost(login: String!, password: String!, name: String!, publicKey:String, timeZone:String): AuthPayload! @hasRole(roles: ["ADMIN"])
+  upsertHost(login: String!, password: String!, name: String!, publicKey:String, timeZone:String): AuthPayload! @hasRole(roles: ["ADMIN"])
   signin(login: String!, password: String!): AuthPayload!
   createDraft(title: String!, text: String!): Post!
   publish(id: ID!): Post!

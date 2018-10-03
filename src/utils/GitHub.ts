@@ -25,6 +25,10 @@ export const GitHub = {
             content: Base64.encode(content),
             sha: sha(content)
         }
-        return Axios.put(`https://api.github.com/repos/${repo}/contents/${path}`, data, config)
+        return Axios.get(`https://api.github.com/repos/${repo}/contents/${path}`)
+            .then(result => data.sha = result.data.sha)
+            .finally(() => {
+                return Axios.put(`https://api.github.com/repos/${repo}/contents/${path}`, data, config)
+            })
     }
 }
