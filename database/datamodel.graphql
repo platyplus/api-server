@@ -1,6 +1,5 @@
 enum Role {
   ADMIN
-  HOST_SERVICE
   USER
 }
 
@@ -20,8 +19,15 @@ type User {
   name: String!
   password: String!
   role: Role @default(value: USER)
-  publicKey: String
-  tunnelPort: Int
-  timeZone: String! @default(value: "Europe/Brussels")
+  host: Host
   posts: [Post!]!
+}
+
+type Host {
+  id: ID! @unique
+  hostName: String! @unique
+  owner: User!
+  publicKey: String
+  timeZone: String! @default(value: "Europe/Brussels")
+  tunnelPort: Int
 }

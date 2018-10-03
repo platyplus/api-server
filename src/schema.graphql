@@ -6,17 +6,14 @@ type Query {
   feed: [Post!]!
   drafts: [Post!]!
   post(id: ID!): Post
-  users(login: String): [User!]! @hasRole(roles: ["ADMIN"])
-  # TODO revoir les droits d'acces: ADMIN || (HOST_SERVICE && login == user.login)
-  # @hasRole(roles: ["ADMIN", "HOST_SERVICE"])
-  hostSettings(login: String!): String!
+  users(login: String): [User!]!
+  hostSettings(hostName: String!): String!
   me: User
 }
 
 type Mutation {
   signup(login: String!, password: String!, name: String!): AuthPayload!
-  # createHost(login: String!, password: String!, name: String!, publicKey:String, timeZone:String): AuthPayload! @hasRole(roles: ["ADMIN"])
-  upsertHost(login: String!, password: String!, name: String!, publicKey:String, timeZone:String): AuthPayload! @hasRole(roles: ["ADMIN"])
+  upsertHost(ownerId: String!, hostName: String!, publicKey:String, timeZone:String): AuthPayload!
   signin(login: String!, password: String!): AuthPayload!
   createDraft(title: String!, text: String!): Post!
   publish(id: ID!): Post!
@@ -37,8 +34,14 @@ type User {
   login: String!
   role: String!
   name: String!
+  posts: [Post!]!
+}
+
+type Host {
+  id: ID!
+  hostName: String!
+  owner: User!
   publicKey: String
   tunnelPort: Int
   timeZone: String
-  posts: [Post!]!
 }
