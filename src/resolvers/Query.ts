@@ -27,6 +27,10 @@ export const Query = {
     return ctx.db.query.users({ where: args }, info)
   },
 
+  hosts(parent, args, ctx: Context, info) {
+    return ctx.db.query.hosts({ where: args }, info)
+  },
+
   /** Generates the settings.nix file of the given host from its login, base 64 encoded */
   hostSettings(parent, { hostName }, ctx: Context, info) {
     return ctx.db.query.host({ where: { hostName } }).then((host) => {

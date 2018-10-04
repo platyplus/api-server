@@ -831,6 +831,7 @@ type Query {
 
 enum Role {
   ADMIN
+  SERVICE
   USER
 }
 
@@ -1215,6 +1216,7 @@ export const Prisma = makePrismaBindingClass<BindingConstructor<Prisma>>({typeDe
 */
 
 export type Role =   'ADMIN' |
+  'SERVICE' |
   'USER'
 
 export type PostOrderByInput =   'id_ASC' |

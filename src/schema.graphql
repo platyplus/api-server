@@ -7,14 +7,17 @@ type Query {
   drafts: [Post!]!
   post(id: ID!): Post
   users(login: String): [User!]!
+  host(hostName:String!): Host
+  hosts(hostName: String): [Host!]!
   hostSettings(hostName: String!): String!
   me: User
 }
 
 type Mutation {
   signup(login: String!, password: String!, name: String!): AuthPayload!
-  upsertHost(ownerId: String!, hostName: String!, publicKey:String, timeZone:String): AuthPayload!
   signin(login: String!, password: String!): AuthPayload!
+  upsertHost(ownerId: String!, hostName: String!, publicKey:String, timeZone:String): Host!
+  upsertUser(login: String!, password: String!, name: String!, role:Role): AuthPayload!
   createDraft(title: String!, text: String!): Post!
   publish(id: ID!): Post!
   deletePost(id: ID!): Post!

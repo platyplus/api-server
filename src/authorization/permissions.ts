@@ -3,11 +3,14 @@ import { isAuthenticated, isAdmin, isUser, isOwner } from './rules';
 export default shield({
     Query: {
       me: isAuthenticated,
-      users: and(isAuthenticated, isAdmin),
-      hostSettings: and(isAuthenticated, or(isAdmin, isOwner)),
+      users: isAdmin,
+      hosts: isAdmin,
+      host: or(isAdmin, isOwner),
+      hostSettings: or(isAdmin, isOwner),
     },
     Mutation: {
-      upsertHost: and(isAuthenticated, or(isAdmin, isOwner)),
+      upsertHost: or(isAdmin, isOwner),
+      upsertUser: isAdmin,
     },
     Host: isAuthenticated,
   })

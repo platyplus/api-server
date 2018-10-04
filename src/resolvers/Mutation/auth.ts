@@ -31,4 +31,19 @@ export const auth = {
       user,
     }
   },
+
+  async upsertUser(parent, args, ctx: Context, info) {
+    console.log(args)
+    args.password = await bcrypt.hash(args.password, 10)
+    const user = await ctx.db.mutation.upsertUser(
+      { 
+        where: { login: args.login },
+        create: args,
+        update: args
+    })
+    return {
+      token: jwt.sign({ userId: user.id }, process.env.APP_SECRET),
+      user,
+    }
+  }
 }

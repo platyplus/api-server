@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/pilou-f64910/graphql-server-dummy/dev
-# timestamp: Wed Oct 03 2018 20:42:31 GMT+0200 (GMT+02:00)
+# timestamp: Thu Oct 04 2018 11:10:56 GMT+0200 (GMT+02:00)
 
 type AggregateHost {
   count: Int!
@@ -761,6 +761,7 @@ type Query {
 
 enum Role {
   ADMIN
+  SERVICE
   USER
 }
 

@@ -4,16 +4,16 @@ export const host = {
     /** Create/Update a host. Accessible to admins only
      * Set the tunnel port as a calculated value
     */
-    async upsertHost(parent, args, ctx: Context, info) {
+    async upsertHost(parent, { ownerId, hostName, publicKey, timeZone }, ctx: Context, info) {
         // TODO: control access: only admins or owners
-        const owner = await ctx.db.query.user({ where: { id: args.ownerId } })
+        const owner = await ctx.db.query.user({ where: { id: ownerId } })
         if (!owner) {
-            throw new Error(`No such owner found with id  ${args.ownerId}`)
+            throw new Error(`No such owner found with id  ${ownerId}`)
         }
         const tunnelPort = Number(process.env.NIXOS_FIRST_TUNNEL_PORT) + await ctx.db.query.hostsConnection({}, '{ aggregate { count } }').then(res => res.aggregate.count)
         // TODO: get timeZone from http request?
         // Updates the tunnel public keys file in the repository
-        if (args.publicKey) {
+        if (publicKey) {
             let tunnelKeysString = await GitHub.getFile(process.env.NIXOS_GITHUB_REPOSITORY, "keys/tunnel")
             let tunnelKeys = tunnelKeysString.split("\n")
             let found = false
@@ -21,13 +21,13 @@ export const host = {
                 .map(key => {
                     if (key.includes(owner.login)) {
                         found = true
-                        return args.publicKey
+                        return publicKey
                     } else return key
                 })
                 .filter(key => key != '')
             let message = `Udpated the public key for ${owner.login}`
             if (!found) {
-                tunnelKeys.push(args.publicKey)
+                tunnelKeys.push(publicKey)
                 message = `Created the public key for ${owner.login}`
             }
             tunnelKeysString = tunnelKeys.join("\n")
@@ -36,26 +36,27 @@ export const host = {
                 tunnelKeysString,
                 message).catch(error => console.log(error))
         }
-        return ctx.db.mutation.upsertHost(
-            {
-                where: {
-                    hostName: args.hostName
+        return ctx.db.mutation.upsertHost({
+            where: {
+                hostName
+            },
+            create: {
+                hostName,
+                publicKey,
+                timeZone,
+                owner: {
+                    connect: { id: ownerId }
                 },
-                create: {
-                    ...args,
-                    owner: {
-                        connect: { id: args.ownerId }
-                    },
-                    tunnelPort
+                tunnelPort
+            },
+            update: {
+                publicKey,
+                timeZone,
+                owner: {
+                    connect: { id: ownerId }
                 },
-                update: {
-                    ...args,
-                    owner: {
-                        connect: { id: args.ownerId }
-                    },
-                }
             }
-        )
+        })
     },
 
 }
