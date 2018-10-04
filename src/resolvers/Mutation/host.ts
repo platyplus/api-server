@@ -5,7 +5,6 @@ export const host = {
      * Set the tunnel port as a calculated value
     */
     async upsertHost(parent, { ownerId, hostName, publicKey, timeZone }, ctx: Context, info) {
-        // TODO: control access: only admins or owners
         const owner = await ctx.db.query.user({ where: { id: ownerId } })
         if (!owner) {
             throw new Error(`No such owner found with id  ${ownerId}`)
