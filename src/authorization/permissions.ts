@@ -1,15 +1,14 @@
 import { shield, and, or, not } from 'graphql-shield'
-import { isAuthenticated, isAdmin, isUser, isOwner } from './rules';
+import { isAuthenticated, isAdmin, isUser, ownsHost } from './rules';
 export default shield({
     Query: {
       me: isAuthenticated,
       users: isAdmin,
       hosts: isAdmin,
-      host: or(isAdmin, isOwner),
-      hostSettings: or(isAdmin, isOwner),
+      hostSettings: or(isAdmin, ownsHost),
     },
     Mutation: {
-      upsertHost: or(isAdmin, isOwner),
+      upsertHost: or(isAdmin, ownsHost),
       upsertUser: isAdmin,
     },
     Host: isAuthenticated,

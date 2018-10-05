@@ -32,3 +32,12 @@ type Host {
   timeZone: String! @default(value: "Europe/Brussels")
   tunnelPort: Int
 }
+
+type Application {
+  id: ID! @unique
+  name: String!
+  isSystem: Boolean
+  path: String @unique
+  description: String
+  repository: String
+}
