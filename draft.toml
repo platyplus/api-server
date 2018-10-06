@@ -1,6 +1,6 @@
 [environments]
   [environments.development]
-    name = "graphql-server"
+    name = "api-server"
     namespace = "default"
     wait = true
     watch = false

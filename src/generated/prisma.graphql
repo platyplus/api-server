@@ -1,5 +1,9 @@
 # source: https://eu1.prisma.sh/pilou-f64910/graphql-server-dummy/dev
-# timestamp: Thu Oct 04 2018 11:10:56 GMT+0200 (GMT+02:00)
+# timestamp: Sat Oct 06 2018 13:28:25 GMT+0200 (GMT+02:00)
+
+type AggregateApplication {
+  count: Int!
+}
 
 type AggregateHost {
   count: Int!
@@ -13,6 +17,337 @@ type AggregateUser {
   count: Int!
 }
 
+type Application implements Node {
+  id: ID!
+  name: String!
+  isSystem: Boolean
+  path: String
+  description: String
+  repository: String
+}
+
+"""A connection to a list of items."""
+type ApplicationConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [ApplicationEdge]!
+  aggregate: AggregateApplication!
+}
+
+input ApplicationCreateInput {
+  name: String!
+  isSystem: Boolean
+  path: String
+  description: String
+  repository: String
+}
+
+"""An edge in a connection."""
+type ApplicationEdge {
+  """The item at the end of the edge."""
+  node: Application!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum ApplicationOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  isSystem_ASC
+  isSystem_DESC
+  path_ASC
+  path_DESC
+  description_ASC
+  description_DESC
+  repository_ASC
+  repository_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type ApplicationPreviousValues {
+  id: ID!
+  name: String!
+  isSystem: Boolean
+  path: String
+  description: String
+  repository: String
+}
+
+type ApplicationSubscriptionPayload {
+  mutation: MutationType!
+  node: Application
+  updatedFields: [String!]
+  previousValues: ApplicationPreviousValues
+}
+
+input ApplicationSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ApplicationSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ApplicationSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ApplicationSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: ApplicationWhereInput
+}
+
+input ApplicationUpdateInput {
+  name: String
+  isSystem: Boolean
+  path: String
+  description: String
+  repository: String
+}
+
+input ApplicationWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ApplicationWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ApplicationWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ApplicationWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  isSystem: Boolean
+
+  """All values that are not equal to given value."""
+  isSystem_not: Boolean
+  path: String
+
+  """All values that are not equal to given value."""
+  path_not: String
+
+  """All values that are contained in given list."""
+  path_in: [String!]
+
+  """All values that are not contained in given list."""
+  path_not_in: [String!]
+
+  """All values less than the given value."""
+  path_lt: String
+
+  """All values less than or equal the given value."""
+  path_lte: String
+
+  """All values greater than the given value."""
+  path_gt: String
+
+  """All values greater than or equal the given value."""
+  path_gte: String
+
+  """All values containing the given string."""
+  path_contains: String
+
+  """All values not containing the given string."""
+  path_not_contains: String
+
+  """All values starting with the given string."""
+  path_starts_with: String
+
+  """All values not starting with the given string."""
+  path_not_starts_with: String
+
+  """All values ending with the given string."""
+  path_ends_with: String
+
+  """All values not ending with the given string."""
+  path_not_ends_with: String
+  description: String
+
+  """All values that are not equal to given value."""
+  description_not: String
+
+  """All values that are contained in given list."""
+  description_in: [String!]
+
+  """All values that are not contained in given list."""
+  description_not_in: [String!]
+
+  """All values less than the given value."""
+  description_lt: String
+
+  """All values less than or equal the given value."""
+  description_lte: String
+
+  """All values greater than the given value."""
+  description_gt: String
+
+  """All values greater than or equal the given value."""
+  description_gte: String
+
+  """All values containing the given string."""
+  description_contains: String
+
+  """All values not containing the given string."""
+  description_not_contains: String
+
+  """All values starting with the given string."""
+  description_starts_with: String
+
+  """All values not starting with the given string."""
+  description_not_starts_with: String
+
+  """All values ending with the given string."""
+  description_ends_with: String
+
+  """All values not ending with the given string."""
+  description_not_ends_with: String
+  repository: String
+
+  """All values that are not equal to given value."""
+  repository_not: String
+
+  """All values that are contained in given list."""
+  repository_in: [String!]
+
+  """All values that are not contained in given list."""
+  repository_not_in: [String!]
+
+  """All values less than the given value."""
+  repository_lt: String
+
+  """All values less than or equal the given value."""
+  repository_lte: String
+
+  """All values greater than the given value."""
+  repository_gt: String
+
+  """All values greater than or equal the given value."""
+  repository_gte: String
+
+  """All values containing the given string."""
+  repository_contains: String
+
+  """All values not containing the given string."""
+  repository_not_contains: String
+
+  """All values starting with the given string."""
+  repository_starts_with: String
+
+  """All values not starting with the given string."""
+  repository_not_starts_with: String
+
+  """All values ending with the given string."""
+  repository_ends_with: String
+
+  """All values not ending with the given string."""
+  repository_not_ends_with: String
+}
+
+input ApplicationWhereUniqueInput {
+  id: ID
+  path: String
+}
+
 type BatchPayload {
   """The number of nodes that have been affected by the Batch operation."""
   count: Long!
@@ -23,7 +358,7 @@ scalar DateTime
 type Host implements Node {
   id: ID!
   hostName: String!
-  owner: User!
+  password: String!
   publicKey: String
   timeZone: String!
   tunnelPort: Int
@@ -41,19 +376,7 @@ type HostConnection {
 
 input HostCreateInput {
   hostName: String!
-  publicKey: String
-  timeZone: String
-  tunnelPort: Int
-  owner: UserCreateOneWithoutHostInput!
-}
-
-input HostCreateOneWithoutOwnerInput {
-  create: HostCreateWithoutOwnerInput
-  connect: HostWhereUniqueInput
-}
-
-input HostCreateWithoutOwnerInput {
-  hostName: String!
+  password: String!
   publicKey: String
   timeZone: String
   tunnelPort: Int
@@ -73,6 +396,8 @@ enum HostOrderByInput {
   id_DESC
   hostName_ASC
   hostName_DESC
+  password_ASC
+  password_DESC
   publicKey_ASC
   publicKey_DESC
   timeZone_ASC
@@ -88,6 +413,7 @@ enum HostOrderByInput {
 type HostPreviousValues {
   id: ID!
   hostName: String!
+  password: String!
   publicKey: String
   timeZone: String!
   tunnelPort: Int
@@ -134,31 +460,10 @@ input HostSubscriptionWhereInput {
 
 input HostUpdateInput {
   hostName: String
+  password: String
   publicKey: String
   timeZone: String
   tunnelPort: Int
-  owner: UserUpdateOneRequiredWithoutHostInput
-}
-
-input HostUpdateOneWithoutOwnerInput {
-  create: HostCreateWithoutOwnerInput
-  connect: HostWhereUniqueInput
-  disconnect: Boolean
-  delete: Boolean
-  update: HostUpdateWithoutOwnerDataInput
-  upsert: HostUpsertWithoutOwnerInput
-}
-
-input HostUpdateWithoutOwnerDataInput {
-  hostName: String
-  publicKey: String
-  timeZone: String
-  tunnelPort: Int
-}
-
-input HostUpsertWithoutOwnerInput {
-  update: HostUpdateWithoutOwnerDataInput!
-  create: HostCreateWithoutOwnerInput!
 }
 
 input HostWhereInput {
@@ -250,6 +555,46 @@ input HostWhereInput {
 
   """All values not ending with the given string."""
   hostName_not_ends_with: String
+  password: String
+
+  """All values that are not equal to given value."""
+  password_not: String
+
+  """All values that are contained in given list."""
+  password_in: [String!]
+
+  """All values that are not contained in given list."""
+  password_not_in: [String!]
+
+  """All values less than the given value."""
+  password_lt: String
+
+  """All values less than or equal the given value."""
+  password_lte: String
+
+  """All values greater than the given value."""
+  password_gt: String
+
+  """All values greater than or equal the given value."""
+  password_gte: String
+
+  """All values containing the given string."""
+  password_contains: String
+
+  """All values not containing the given string."""
+  password_not_contains: String
+
+  """All values starting with the given string."""
+  password_starts_with: String
+
+  """All values not starting with the given string."""
+  password_not_starts_with: String
+
+  """All values ending with the given string."""
+  password_ends_with: String
+
+  """All values not ending with the given string."""
+  password_not_ends_with: String
   publicKey: String
 
   """All values that are not equal to given value."""
@@ -352,7 +697,6 @@ input HostWhereInput {
 
   """All values greater than or equal the given value."""
   tunnelPort_gte: Int
-  owner: UserWhereInput
 }
 
 input HostWhereUniqueInput {
@@ -370,21 +714,27 @@ type Mutation {
   createPost(data: PostCreateInput!): Post!
   createUser(data: UserCreateInput!): User!
   createHost(data: HostCreateInput!): Host!
+  createApplication(data: ApplicationCreateInput!): Application!
   updatePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateHost(data: HostUpdateInput!, where: HostWhereUniqueInput!): Host
+  updateApplication(data: ApplicationUpdateInput!, where: ApplicationWhereUniqueInput!): Application
   deletePost(where: PostWhereUniqueInput!): Post
   deleteUser(where: UserWhereUniqueInput!): User
   deleteHost(where: HostWhereUniqueInput!): Host
+  deleteApplication(where: ApplicationWhereUniqueInput!): Application
   upsertPost(where: PostWhereUniqueInput!, create: PostCreateInput!, update: PostUpdateInput!): Post!
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertHost(where: HostWhereUniqueInput!, create: HostCreateInput!, update: HostUpdateInput!): Host!
+  upsertApplication(where: ApplicationWhereUniqueInput!, create: ApplicationCreateInput!, update: ApplicationUpdateInput!): Application!
   updateManyPosts(data: PostUpdateInput!, where: PostWhereInput): BatchPayload!
   updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
   updateManyHosts(data: HostUpdateInput!, where: HostWhereInput): BatchPayload!
+  updateManyApplications(data: ApplicationUpdateInput!, where: ApplicationWhereInput): BatchPayload!
   deleteManyPosts(where: PostWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyHosts(where: HostWhereInput): BatchPayload!
+  deleteManyApplications(where: ApplicationWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -745,12 +1095,15 @@ type Query {
   posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post]!
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   hosts(where: HostWhereInput, orderBy: HostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Host]!
+  applications(where: ApplicationWhereInput, orderBy: ApplicationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Application]!
   post(where: PostWhereUniqueInput!): Post
   user(where: UserWhereUniqueInput!): User
   host(where: HostWhereUniqueInput!): Host
+  application(where: ApplicationWhereUniqueInput!): Application
   postsConnection(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PostConnection!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   hostsConnection(where: HostWhereInput, orderBy: HostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): HostConnection!
+  applicationsConnection(where: ApplicationWhereInput, orderBy: ApplicationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ApplicationConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -761,7 +1114,6 @@ type Query {
 
 enum Role {
   ADMIN
-  SERVICE
   USER
 }
 
@@ -769,6 +1121,7 @@ type Subscription {
   post(where: PostSubscriptionWhereInput): PostSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   host(where: HostSubscriptionWhereInput): HostSubscriptionPayload
+  application(where: ApplicationSubscriptionWhereInput): ApplicationSubscriptionPayload
 }
 
 type User implements Node {
@@ -777,7 +1130,6 @@ type User implements Node {
   name: String!
   password: String!
   role: Role
-  host: Host
   posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post!]
 }
 
@@ -796,13 +1148,7 @@ input UserCreateInput {
   name: String!
   password: String!
   role: Role
-  host: HostCreateOneWithoutOwnerInput
   posts: PostCreateManyWithoutAuthorInput
-}
-
-input UserCreateOneWithoutHostInput {
-  create: UserCreateWithoutHostInput
-  connect: UserWhereUniqueInput
 }
 
 input UserCreateOneWithoutPostsInput {
@@ -810,20 +1156,11 @@ input UserCreateOneWithoutPostsInput {
   connect: UserWhereUniqueInput
 }
 
-input UserCreateWithoutHostInput {
-  login: String!
-  name: String!
-  password: String!
-  role: Role
-  posts: PostCreateManyWithoutAuthorInput
-}
-
 input UserCreateWithoutPostsInput {
   login: String!
   name: String!
   password: String!
   role: Role
-  host: HostCreateOneWithoutOwnerInput
 }
 
 """An edge in a connection."""
@@ -904,15 +1241,7 @@ input UserUpdateInput {
   name: String
   password: String
   role: Role
-  host: HostUpdateOneWithoutOwnerInput
   posts: PostUpdateManyWithoutAuthorInput
-}
-
-input UserUpdateOneRequiredWithoutHostInput {
-  create: UserCreateWithoutHostInput
-  connect: UserWhereUniqueInput
-  update: UserUpdateWithoutHostDataInput
-  upsert: UserUpsertWithoutHostInput
 }
 
 input UserUpdateOneRequiredWithoutPostsInput {
@@ -922,25 +1251,11 @@ input UserUpdateOneRequiredWithoutPostsInput {
   upsert: UserUpsertWithoutPostsInput
 }
 
-input UserUpdateWithoutHostDataInput {
-  login: String
-  name: String
-  password: String
-  role: Role
-  posts: PostUpdateManyWithoutAuthorInput
-}
-
 input UserUpdateWithoutPostsDataInput {
   login: String
   name: String
   password: String
   role: Role
-  host: HostUpdateOneWithoutOwnerInput
-}
-
-input UserUpsertWithoutHostInput {
-  update: UserUpdateWithoutHostDataInput!
-  create: UserCreateWithoutHostInput!
 }
 
 input UserUpsertWithoutPostsInput {
@@ -1127,7 +1442,6 @@ input UserWhereInput {
 
   """All values that are not contained in given list."""
   role_not_in: [Role!]
-  host: HostWhereInput
   posts_every: PostWhereInput
   posts_some: PostWhereInput
   posts_none: PostWhereInput

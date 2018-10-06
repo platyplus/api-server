@@ -3,7 +3,7 @@ steps:
   BuildingDockerImage:
     title: Building Docker Image
     type: build
-    image_name: platyplus/graphql-server
+    image_name: platyplus/api-server
     working_directory: ./
     tag: ${{CF_BRANCH_TAG_NORMALIZED}}
     dockerfile: Dockerfile
@@ -14,11 +14,11 @@ steps:
      - ACTION=push
      - CHART_REF=.
   DeployChart:
-    title: Deploying the GraphQL server helm chart...
+    title: Deploying the PlatyPlus API server helm chart...
     image: 'codefresh/cfstep-helm:2.9.1'
     environment:
      - CHART_REF=.
-     - RELEASE_NAME=graphql
+     - RELEASE_NAME=api
      - KUBE_CONTEXT=main@platyplus
      - VALUE_image_pullPolicy=Always
      - VALUE_image_tag=${{CF_BRANCH_TAG_NORMALIZED}}

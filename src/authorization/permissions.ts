@@ -5,7 +5,6 @@ export default shield({
       me: isAuthenticated,
       users: isAdmin,
       hosts: isAdmin,
-      hostSettings: or(isAdmin, ownsHost),
     },
     Mutation: {
       upsertHost: or(isAdmin, ownsHost),

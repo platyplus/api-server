@@ -1,4 +1,4 @@
-# GraphQL Server
+# GraphQL and Express Server
 [![Codefresh build status]( https://g.codefresh.io/api/badges/pipeline/plmercereau/platyplus%2Fgraphql-server%2Fgraphql-server?branch=master&key=eyJhbGciOiJIUzI1NiJ9.NWI5M2U0MGQwNTdiOGUwMDAxZmFkMjgx.OXdTB7Vte67YoKtDo9yes3tLkr8usTBnsY7t8HtTkyg&type=cf-1)]( https://g.codefresh.io/repositories/platyplus/graphql-server/builds?filter=trigger:build;branch:master;service:5b9573c4e885213f997ababe~graphql-server)
 
 - https://codefresh.io/docker-tutorial/node_docker_multistage/

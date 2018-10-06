@@ -1,9 +1,9 @@
 replicaCount: 1
 image:
   pullPolicy: IfNotPresent
-  repository: r.cfcr.io/plmercereau/platyplus/graphql-server
+  repository: r.cfcr.io/plmercereau/platyplus/api-server
 service:
-  name: graphql-server
+  name: api-server
   type: ClusterIP
   externalPort: 5000
   internalPort: 5000
@@ -20,8 +20,8 @@ ingress:
     kubernetes.io/ingress.class: nginx
     kubernetes.io/tls-acme: "true"
   hosts:
-  - graphql.platyplus.io
+  - api.platyplus.io
   tls:
   - hosts:
-    - graphql.platyplus.io
+    - api.platyplus.io
 basedomain: platyplus.io

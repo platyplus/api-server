@@ -28,4 +28,12 @@ mutation {
   }) {
     id
   }
+  nixtest2:createHost(data: {
+    hostName: "nix-test2"
+    password: "1234"
+    publicKey: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ55lO9L5ydbunp1QIam4XFVYSS0XJx7wBzNsaen1C/6 tunnel@nix-test2"
+    tunnelPort: 7000
+  }) {
+    id
+  }
 }

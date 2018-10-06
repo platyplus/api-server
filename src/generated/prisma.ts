@@ -7,12 +7,15 @@ export interface Query {
     posts: <T = Post[]>(args: { where?: PostWhereInput, orderBy?: PostOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     users: <T = User[]>(args: { where?: UserWhereInput, orderBy?: UserOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     hosts: <T = Host[]>(args: { where?: HostWhereInput, orderBy?: HostOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    applications: <T = Application[]>(args: { where?: ApplicationWhereInput, orderBy?: ApplicationOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     post: <T = Post | null>(args: { where: PostWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     user: <T = User | null>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     host: <T = Host | null>(args: { where: HostWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    application: <T = Application | null>(args: { where: ApplicationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     postsConnection: <T = PostConnection>(args: { where?: PostWhereInput, orderBy?: PostOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     usersConnection: <T = UserConnection>(args: { where?: UserWhereInput, orderBy?: UserOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     hostsConnection: <T = HostConnection>(args: { where?: HostWhereInput, orderBy?: HostOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    applicationsConnection: <T = ApplicationConnection>(args: { where?: ApplicationWhereInput, orderBy?: ApplicationOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     node: <T = Node | null>(args: { id: ID_Output }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> 
   }
 
@@ -20,33 +23,41 @@ export interface Mutation {
     createPost: <T = Post>(args: { data: PostCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createUser: <T = User>(args: { data: UserCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createHost: <T = Host>(args: { data: HostCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    createApplication: <T = Application>(args: { data: ApplicationCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updatePost: <T = Post | null>(args: { data: PostUpdateInput, where: PostWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateUser: <T = User | null>(args: { data: UserUpdateInput, where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateHost: <T = Host | null>(args: { data: HostUpdateInput, where: HostWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateApplication: <T = Application | null>(args: { data: ApplicationUpdateInput, where: ApplicationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deletePost: <T = Post | null>(args: { where: PostWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteUser: <T = User | null>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteHost: <T = Host | null>(args: { where: HostWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteApplication: <T = Application | null>(args: { where: ApplicationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertPost: <T = Post>(args: { where: PostWhereUniqueInput, create: PostCreateInput, update: PostUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertUser: <T = User>(args: { where: UserWhereUniqueInput, create: UserCreateInput, update: UserUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertHost: <T = Host>(args: { where: HostWhereUniqueInput, create: HostCreateInput, update: HostUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertApplication: <T = Application>(args: { where: ApplicationWhereUniqueInput, create: ApplicationCreateInput, update: ApplicationUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyPosts: <T = BatchPayload>(args: { data: PostUpdateInput, where?: PostWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyUsers: <T = BatchPayload>(args: { data: UserUpdateInput, where?: UserWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyHosts: <T = BatchPayload>(args: { data: HostUpdateInput, where?: HostWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateManyApplications: <T = BatchPayload>(args: { data: ApplicationUpdateInput, where?: ApplicationWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyPosts: <T = BatchPayload>(args: { where?: PostWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyUsers: <T = BatchPayload>(args: { where?: UserWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    deleteManyHosts: <T = BatchPayload>(args: { where?: HostWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> 
+    deleteManyHosts: <T = BatchPayload>(args: { where?: HostWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteManyApplications: <T = BatchPayload>(args: { where?: ApplicationWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> 
   }
 
 export interface Subscription {
     post: <T = PostSubscriptionPayload | null>(args: { where?: PostSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> ,
     user: <T = UserSubscriptionPayload | null>(args: { where?: UserSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> ,
-    host: <T = HostSubscriptionPayload | null>(args: { where?: HostSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> 
+    host: <T = HostSubscriptionPayload | null>(args: { where?: HostSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> ,
+    application: <T = ApplicationSubscriptionPayload | null>(args: { where?: ApplicationSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> 
   }
 
 export interface Exists {
   Post: (where?: PostWhereInput) => Promise<boolean>
   User: (where?: UserWhereInput) => Promise<boolean>
   Host: (where?: HostWhereInput) => Promise<boolean>
+  Application: (where?: ApplicationWhereInput) => Promise<boolean>
 }
 
 export interface Prisma {
@@ -71,7 +82,11 @@ export interface BindingConstructor<T> {
  * Type Defs
 */
 
-const typeDefs = `type AggregateHost {
+const typeDefs = `type AggregateApplication {
+  count: Int!
+}
+
+type AggregateHost {
   count: Int!
 }
 
@@ -81,6 +96,337 @@ type AggregatePost {
 
 type AggregateUser {
   count: Int!
+}
+
+type Application implements Node {
+  id: ID!
+  name: String!
+  isSystem: Boolean
+  path: String
+  description: String
+  repository: String
+}
+
+"""A connection to a list of items."""
+type ApplicationConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [ApplicationEdge]!
+  aggregate: AggregateApplication!
+}
+
+input ApplicationCreateInput {
+  name: String!
+  isSystem: Boolean
+  path: String
+  description: String
+  repository: String
+}
+
+"""An edge in a connection."""
+type ApplicationEdge {
+  """The item at the end of the edge."""
+  node: Application!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum ApplicationOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  isSystem_ASC
+  isSystem_DESC
+  path_ASC
+  path_DESC
+  description_ASC
+  description_DESC
+  repository_ASC
+  repository_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type ApplicationPreviousValues {
+  id: ID!
+  name: String!
+  isSystem: Boolean
+  path: String
+  description: String
+  repository: String
+}
+
+type ApplicationSubscriptionPayload {
+  mutation: MutationType!
+  node: Application
+  updatedFields: [String!]
+  previousValues: ApplicationPreviousValues
+}
+
+input ApplicationSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ApplicationSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ApplicationSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ApplicationSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: ApplicationWhereInput
+}
+
+input ApplicationUpdateInput {
+  name: String
+  isSystem: Boolean
+  path: String
+  description: String
+  repository: String
+}
+
+input ApplicationWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ApplicationWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ApplicationWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ApplicationWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  isSystem: Boolean
+
+  """All values that are not equal to given value."""
+  isSystem_not: Boolean
+  path: String
+
+  """All values that are not equal to given value."""
+  path_not: String
+
+  """All values that are contained in given list."""
+  path_in: [String!]
+
+  """All values that are not contained in given list."""
+  path_not_in: [String!]
+
+  """All values less than the given value."""
+  path_lt: String
+
+  """All values less than or equal the given value."""
+  path_lte: String
+
+  """All values greater than the given value."""
+  path_gt: String
+
+  """All values greater than or equal the given value."""
+  path_gte: String
+
+  """All values containing the given string."""
+  path_contains: String
+
+  """All values not containing the given string."""
+  path_not_contains: String
+
+  """All values starting with the given string."""
+  path_starts_with: String
+
+  """All values not starting with the given string."""
+  path_not_starts_with: String
+
+  """All values ending with the given string."""
+  path_ends_with: String
+
+  """All values not ending with the given string."""
+  path_not_ends_with: String
+  description: String
+
+  """All values that are not equal to given value."""
+  description_not: String
+
+  """All values that are contained in given list."""
+  description_in: [String!]
+
+  """All values that are not contained in given list."""
+  description_not_in: [String!]
+
+  """All values less than the given value."""
+  description_lt: String
+
+  """All values less than or equal the given value."""
+  description_lte: String
+
+  """All values greater than the given value."""
+  description_gt: String
+
+  """All values greater than or equal the given value."""
+  description_gte: String
+
+  """All values containing the given string."""
+  description_contains: String
+
+  """All values not containing the given string."""
+  description_not_contains: String
+
+  """All values starting with the given string."""
+  description_starts_with: String
+
+  """All values not starting with the given string."""
+  description_not_starts_with: String
+
+  """All values ending with the given string."""
+  description_ends_with: String
+
+  """All values not ending with the given string."""
+  description_not_ends_with: String
+  repository: String
+
+  """All values that are not equal to given value."""
+  repository_not: String
+
+  """All values that are contained in given list."""
+  repository_in: [String!]
+
+  """All values that are not contained in given list."""
+  repository_not_in: [String!]
+
+  """All values less than the given value."""
+  repository_lt: String
+
+  """All values less than or equal the given value."""
+  repository_lte: String
+
+  """All values greater than the given value."""
+  repository_gt: String
+
+  """All values greater than or equal the given value."""
+  repository_gte: String
+
+  """All values containing the given string."""
+  repository_contains: String
+
+  """All values not containing the given string."""
+  repository_not_contains: String
+
+  """All values starting with the given string."""
+  repository_starts_with: String
+
+  """All values not starting with the given string."""
+  repository_not_starts_with: String
+
+  """All values ending with the given string."""
+  repository_ends_with: String
+
+  """All values not ending with the given string."""
+  repository_not_ends_with: String
+}
+
+input ApplicationWhereUniqueInput {
+  id: ID
+  path: String
 }
 
 type BatchPayload {
@@ -93,7 +439,7 @@ scalar DateTime
 type Host implements Node {
   id: ID!
   hostName: String!
-  owner: User!
+  password: String!
   publicKey: String
   timeZone: String!
   tunnelPort: Int
@@ -111,19 +457,7 @@ type HostConnection {
 
 input HostCreateInput {
   hostName: String!
-  publicKey: String
-  timeZone: String
-  tunnelPort: Int
-  owner: UserCreateOneWithoutHostInput!
-}
-
-input HostCreateOneWithoutOwnerInput {
-  create: HostCreateWithoutOwnerInput
-  connect: HostWhereUniqueInput
-}
-
-input HostCreateWithoutOwnerInput {
-  hostName: String!
+  password: String!
   publicKey: String
   timeZone: String
   tunnelPort: Int
@@ -143,6 +477,8 @@ enum HostOrderByInput {
   id_DESC
   hostName_ASC
   hostName_DESC
+  password_ASC
+  password_DESC
   publicKey_ASC
   publicKey_DESC
   timeZone_ASC
@@ -158,6 +494,7 @@ enum HostOrderByInput {
 type HostPreviousValues {
   id: ID!
   hostName: String!
+  password: String!
   publicKey: String
   timeZone: String!
   tunnelPort: Int
@@ -204,31 +541,10 @@ input HostSubscriptionWhereInput {
 
 input HostUpdateInput {
   hostName: String
+  password: String
   publicKey: String
   timeZone: String
   tunnelPort: Int
-  owner: UserUpdateOneRequiredWithoutHostInput
-}
-
-input HostUpdateOneWithoutOwnerInput {
-  create: HostCreateWithoutOwnerInput
-  connect: HostWhereUniqueInput
-  disconnect: Boolean
-  delete: Boolean
-  update: HostUpdateWithoutOwnerDataInput
-  upsert: HostUpsertWithoutOwnerInput
-}
-
-input HostUpdateWithoutOwnerDataInput {
-  hostName: String
-  publicKey: String
-  timeZone: String
-  tunnelPort: Int
-}
-
-input HostUpsertWithoutOwnerInput {
-  update: HostUpdateWithoutOwnerDataInput!
-  create: HostCreateWithoutOwnerInput!
 }
 
 input HostWhereInput {
@@ -320,6 +636,46 @@ input HostWhereInput {
 
   """All values not ending with the given string."""
   hostName_not_ends_with: String
+  password: String
+
+  """All values that are not equal to given value."""
+  password_not: String
+
+  """All values that are contained in given list."""
+  password_in: [String!]
+
+  """All values that are not contained in given list."""
+  password_not_in: [String!]
+
+  """All values less than the given value."""
+  password_lt: String
+
+  """All values less than or equal the given value."""
+  password_lte: String
+
+  """All values greater than the given value."""
+  password_gt: String
+
+  """All values greater than or equal the given value."""
+  password_gte: String
+
+  """All values containing the given string."""
+  password_contains: String
+
+  """All values not containing the given string."""
+  password_not_contains: String
+
+  """All values starting with the given string."""
+  password_starts_with: String
+
+  """All values not starting with the given string."""
+  password_not_starts_with: String
+
+  """All values ending with the given string."""
+  password_ends_with: String
+
+  """All values not ending with the given string."""
+  password_not_ends_with: String
   publicKey: String
 
   """All values that are not equal to given value."""
@@ -422,7 +778,6 @@ input HostWhereInput {
 
   """All values greater than or equal the given value."""
   tunnelPort_gte: Int
-  owner: UserWhereInput
 }
 
 input HostWhereUniqueInput {
@@ -440,21 +795,27 @@ type Mutation {
   createPost(data: PostCreateInput!): Post!
   createUser(data: UserCreateInput!): User!
   createHost(data: HostCreateInput!): Host!
+  createApplication(data: ApplicationCreateInput!): Application!
   updatePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateHost(data: HostUpdateInput!, where: HostWhereUniqueInput!): Host
+  updateApplication(data: ApplicationUpdateInput!, where: ApplicationWhereUniqueInput!): Application
   deletePost(where: PostWhereUniqueInput!): Post
   deleteUser(where: UserWhereUniqueInput!): User
   deleteHost(where: HostWhereUniqueInput!): Host
+  deleteApplication(where: ApplicationWhereUniqueInput!): Application
   upsertPost(where: PostWhereUniqueInput!, create: PostCreateInput!, update: PostUpdateInput!): Post!
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertHost(where: HostWhereUniqueInput!, create: HostCreateInput!, update: HostUpdateInput!): Host!
+  upsertApplication(where: ApplicationWhereUniqueInput!, create: ApplicationCreateInput!, update: ApplicationUpdateInput!): Application!
   updateManyPosts(data: PostUpdateInput!, where: PostWhereInput): BatchPayload!
   updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
   updateManyHosts(data: HostUpdateInput!, where: HostWhereInput): BatchPayload!
+  updateManyApplications(data: ApplicationUpdateInput!, where: ApplicationWhereInput): BatchPayload!
   deleteManyPosts(where: PostWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyHosts(where: HostWhereInput): BatchPayload!
+  deleteManyApplications(where: ApplicationWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -815,12 +1176,15 @@ type Query {
   posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post]!
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   hosts(where: HostWhereInput, orderBy: HostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Host]!
+  applications(where: ApplicationWhereInput, orderBy: ApplicationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Application]!
   post(where: PostWhereUniqueInput!): Post
   user(where: UserWhereUniqueInput!): User
   host(where: HostWhereUniqueInput!): Host
+  application(where: ApplicationWhereUniqueInput!): Application
   postsConnection(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PostConnection!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   hostsConnection(where: HostWhereInput, orderBy: HostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): HostConnection!
+  applicationsConnection(where: ApplicationWhereInput, orderBy: ApplicationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ApplicationConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -831,7 +1195,6 @@ type Query {
 
 enum Role {
   ADMIN
-  SERVICE
   USER
 }
 
@@ -839,6 +1202,7 @@ type Subscription {
   post(where: PostSubscriptionWhereInput): PostSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   host(where: HostSubscriptionWhereInput): HostSubscriptionPayload
+  application(where: ApplicationSubscriptionWhereInput): ApplicationSubscriptionPayload
 }
 
 type User implements Node {
@@ -847,7 +1211,6 @@ type User implements Node {
   name: String!
   password: String!
   role: Role
-  host: Host
   posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post!]
 }
 
@@ -866,13 +1229,7 @@ input UserCreateInput {
   name: String!
   password: String!
   role: Role
-  host: HostCreateOneWithoutOwnerInput
   posts: PostCreateManyWithoutAuthorInput
-}
-
-input UserCreateOneWithoutHostInput {
-  create: UserCreateWithoutHostInput
-  connect: UserWhereUniqueInput
 }
 
 input UserCreateOneWithoutPostsInput {
@@ -880,20 +1237,11 @@ input UserCreateOneWithoutPostsInput {
   connect: UserWhereUniqueInput
 }
 
-input UserCreateWithoutHostInput {
-  login: String!
-  name: String!
-  password: String!
-  role: Role
-  posts: PostCreateManyWithoutAuthorInput
-}
-
 input UserCreateWithoutPostsInput {
   login: String!
   name: String!
   password: String!
   role: Role
-  host: HostCreateOneWithoutOwnerInput
 }
 
 """An edge in a connection."""
@@ -974,15 +1322,7 @@ input UserUpdateInput {
   name: String
   password: String
   role: Role
-  host: HostUpdateOneWithoutOwnerInput
   posts: PostUpdateManyWithoutAuthorInput
-}
-
-input UserUpdateOneRequiredWithoutHostInput {
-  create: UserCreateWithoutHostInput
-  connect: UserWhereUniqueInput
-  update: UserUpdateWithoutHostDataInput
-  upsert: UserUpsertWithoutHostInput
 }
 
 input UserUpdateOneRequiredWithoutPostsInput {
@@ -992,25 +1332,11 @@ input UserUpdateOneRequiredWithoutPostsInput {
   upsert: UserUpsertWithoutPostsInput
 }
 
-input UserUpdateWithoutHostDataInput {
-  login: String
-  name: String
-  password: String
-  role: Role
-  posts: PostUpdateManyWithoutAuthorInput
-}
-
 input UserUpdateWithoutPostsDataInput {
   login: String
   name: String
   password: String
   role: Role
-  host: HostUpdateOneWithoutOwnerInput
-}
-
-input UserUpsertWithoutHostInput {
-  update: UserUpdateWithoutHostDataInput!
-  create: UserCreateWithoutHostInput!
 }
 
 input UserUpsertWithoutPostsInput {
@@ -1197,7 +1523,6 @@ input UserWhereInput {
 
   """All values that are not contained in given list."""
   role_not_in: [Role!]
-  host: HostWhereInput
   posts_every: PostWhereInput
   posts_some: PostWhereInput
   posts_none: PostWhereInput
@@ -1215,9 +1540,9 @@ export const Prisma = makePrismaBindingClass<BindingConstructor<Prisma>>({typeDe
  * Types
 */
 
-export type Role =   'ADMIN' |
-  'SERVICE' |
-  'USER'
+export type MutationType =   'CREATED' |
+  'UPDATED' |
+  'DELETED'
 
 export type PostOrderByInput =   'id_ASC' |
   'id_DESC' |
@@ -1231,6 +1556,9 @@ export type PostOrderByInput =   'id_ASC' |
   'title_DESC' |
   'text_ASC' |
   'text_DESC'
+
+export type Role =   'ADMIN' |
+  'USER'
 
 export type UserOrderByInput =   'id_ASC' |
   'id_DESC' |
@@ -1251,6 +1579,8 @@ export type HostOrderByInput =   'id_ASC' |
   'id_DESC' |
   'hostName_ASC' |
   'hostName_DESC' |
+  'password_ASC' |
+  'password_DESC' |
   'publicKey_ASC' |
   'publicKey_DESC' |
   'timeZone_ASC' |
@@ -1262,17 +1592,38 @@ export type HostOrderByInput =   'id_ASC' |
   'createdAt_ASC' |
   'createdAt_DESC'
 
-export type MutationType =   'CREATED' |
-  'UPDATED' |
-  'DELETED'
+export type ApplicationOrderByInput =   'id_ASC' |
+  'id_DESC' |
+  'name_ASC' |
+  'name_DESC' |
+  'isSystem_ASC' |
+  'isSystem_DESC' |
+  'path_ASC' |
+  'path_DESC' |
+  'description_ASC' |
+  'description_DESC' |
+  'repository_ASC' |
+  'repository_DESC' |
+  'updatedAt_ASC' |
+  'updatedAt_DESC' |
+  'createdAt_ASC' |
+  'createdAt_DESC'
 
-export interface UserCreateInput {
+export interface UserWhereUniqueInput {
+  id?: ID_Input
+  login?: String
+}
+
+export interface UserCreateWithoutPostsInput {
   login: String
   name: String
   password: String
   role?: Role
-  host?: HostCreateOneWithoutOwnerInput
-  posts?: PostCreateManyWithoutAuthorInput
+}
+
+export interface PostUpdateWithWhereUniqueWithoutAuthorInput {
+  where: PostWhereUniqueInput
+  data: PostUpdateWithoutAuthorDataInput
 }
 
 export interface PostWhereInput {
@@ -1342,12 +1693,45 @@ export interface PostWhereInput {
   author?: UserWhereInput
 }
 
-export interface HostCreateInput {
-  hostName: String
-  publicKey?: String
-  timeZone?: String
-  tunnelPort?: Int
-  owner: UserCreateOneWithoutHostInput
+export interface PostUpdateManyWithoutAuthorInput {
+  create?: PostCreateWithoutAuthorInput[] | PostCreateWithoutAuthorInput
+  connect?: PostWhereUniqueInput[] | PostWhereUniqueInput
+  disconnect?: PostWhereUniqueInput[] | PostWhereUniqueInput
+  delete?: PostWhereUniqueInput[] | PostWhereUniqueInput
+  update?: PostUpdateWithWhereUniqueWithoutAuthorInput[] | PostUpdateWithWhereUniqueWithoutAuthorInput
+  upsert?: PostUpsertWithWhereUniqueWithoutAuthorInput[] | PostUpsertWithWhereUniqueWithoutAuthorInput
+}
+
+export interface PostSubscriptionWhereInput {
+  AND?: PostSubscriptionWhereInput[] | PostSubscriptionWhereInput
+  OR?: PostSubscriptionWhereInput[] | PostSubscriptionWhereInput
+  NOT?: PostSubscriptionWhereInput[] | PostSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: PostWhereInput
+}
+
+export interface UserUpdateInput {
+  login?: String
+  name?: String
+  password?: String
+  role?: Role
+  posts?: PostUpdateManyWithoutAuthorInput
+}
+
+export interface ApplicationUpdateInput {
+  name?: String
+  isSystem?: Boolean
+  path?: String
+  description?: String
+  repository?: String
+}
+
+export interface UserUpsertWithoutPostsInput {
+  update: UserUpdateWithoutPostsDataInput
+  create: UserCreateWithoutPostsInput
 }
 
 export interface HostWhereInput {
@@ -1382,6 +1766,20 @@ export interface HostWhereInput {
   hostName_not_starts_with?: String
   hostName_ends_with?: String
   hostName_not_ends_with?: String
+  password?: String
+  password_not?: String
+  password_in?: String[] | String
+  password_not_in?: String[] | String
+  password_lt?: String
+  password_lte?: String
+  password_gt?: String
+  password_gte?: String
+  password_contains?: String
+  password_not_contains?: String
+  password_starts_with?: String
+  password_not_starts_with?: String
+  password_ends_with?: String
+  password_not_ends_with?: String
   publicKey?: String
   publicKey_not?: String
   publicKey_in?: String[] | String
@@ -1418,12 +1816,83 @@ export interface HostWhereInput {
   tunnelPort_lte?: Int
   tunnelPort_gt?: Int
   tunnelPort_gte?: Int
-  owner?: UserWhereInput
 }
 
-export interface UserCreateOneWithoutHostInput {
-  create?: UserCreateWithoutHostInput
+export interface UserUpdateWithoutPostsDataInput {
+  login?: String
+  name?: String
+  password?: String
+  role?: Role
+}
+
+export interface HostUpdateInput {
+  hostName?: String
+  password?: String
+  publicKey?: String
+  timeZone?: String
+  tunnelPort?: Int
+}
+
+export interface UserUpdateOneRequiredWithoutPostsInput {
+  create?: UserCreateWithoutPostsInput
   connect?: UserWhereUniqueInput
+  update?: UserUpdateWithoutPostsDataInput
+  upsert?: UserUpsertWithoutPostsInput
+}
+
+export interface HostSubscriptionWhereInput {
+  AND?: HostSubscriptionWhereInput[] | HostSubscriptionWhereInput
+  OR?: HostSubscriptionWhereInput[] | HostSubscriptionWhereInput
+  NOT?: HostSubscriptionWhereInput[] | HostSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: HostWhereInput
+}
+
+export interface PostUpdateInput {
+  isPublished?: Boolean
+  title?: String
+  text?: String
+  author?: UserUpdateOneRequiredWithoutPostsInput
+}
+
+export interface PostWhereUniqueInput {
+  id?: ID_Input
+}
+
+export interface ApplicationCreateInput {
+  name: String
+  isSystem?: Boolean
+  path?: String
+  description?: String
+  repository?: String
+}
+
+export interface HostWhereUniqueInput {
+  id?: ID_Input
+  hostName?: String
+}
+
+export interface HostCreateInput {
+  hostName: String
+  password: String
+  publicKey?: String
+  timeZone?: String
+  tunnelPort?: Int
+}
+
+export interface PostUpdateWithoutAuthorDataInput {
+  isPublished?: Boolean
+  title?: String
+  text?: String
+}
+
+export interface PostCreateWithoutAuthorInput {
+  isPublished?: Boolean
+  title: String
+  text: String
 }
 
 export interface UserWhereInput {
@@ -1490,39 +1959,92 @@ export interface UserWhereInput {
   role_not?: Role
   role_in?: Role[] | Role
   role_not_in?: Role[] | Role
-  host?: HostWhereInput
   posts_every?: PostWhereInput
   posts_some?: PostWhereInput
   posts_none?: PostWhereInput
 }
 
-export interface UserUpdateInput {
-  login?: String
+export interface ApplicationWhereInput {
+  AND?: ApplicationWhereInput[] | ApplicationWhereInput
+  OR?: ApplicationWhereInput[] | ApplicationWhereInput
+  NOT?: ApplicationWhereInput[] | ApplicationWhereInput
+  id?: ID_Input
+  id_not?: ID_Input
+  id_in?: ID_Input[] | ID_Input
+  id_not_in?: ID_Input[] | ID_Input
+  id_lt?: ID_Input
+  id_lte?: ID_Input
+  id_gt?: ID_Input
+  id_gte?: ID_Input
+  id_contains?: ID_Input
+  id_not_contains?: ID_Input
+  id_starts_with?: ID_Input
+  id_not_starts_with?: ID_Input
+  id_ends_with?: ID_Input
+  id_not_ends_with?: ID_Input
   name?: String
-  password?: String
-  role?: Role
-  host?: HostUpdateOneWithoutOwnerInput
-  posts?: PostUpdateManyWithoutAuthorInput
+  name_not?: String
+  name_in?: String[] | String
+  name_not_in?: String[] | String
+  name_lt?: String
+  name_lte?: String
+  name_gt?: String
+  name_gte?: String
+  name_contains?: String
+  name_not_contains?: String
+  name_starts_with?: String
+  name_not_starts_with?: String
+  name_ends_with?: String
+  name_not_ends_with?: String
+  isSystem?: Boolean
+  isSystem_not?: Boolean
+  path?: String
+  path_not?: String
+  path_in?: String[] | String
+  path_not_in?: String[] | String
+  path_lt?: String
+  path_lte?: String
+  path_gt?: String
+  path_gte?: String
+  path_contains?: String
+  path_not_contains?: String
+  path_starts_with?: String
+  path_not_starts_with?: String
+  path_ends_with?: String
+  path_not_ends_with?: String
+  description?: String
+  description_not?: String
+  description_in?: String[] | String
+  description_not_in?: String[] | String
+  description_lt?: String
+  description_lte?: String
+  description_gt?: String
+  description_gte?: String
+  description_contains?: String
+  description_not_contains?: String
+  description_starts_with?: String
+  description_not_starts_with?: String
+  description_ends_with?: String
+  description_not_ends_with?: String
+  repository?: String
+  repository_not?: String
+  repository_in?: String[] | String
+  repository_not_in?: String[] | String
+  repository_lt?: String
+  repository_lte?: String
+  repository_gt?: String
+  repository_gte?: String
+  repository_contains?: String
+  repository_not_contains?: String
+  repository_starts_with?: String
+  repository_not_starts_with?: String
+  repository_ends_with?: String
+  repository_not_ends_with?: String
 }
 
-export interface UserUpdateOneRequiredWithoutPostsInput {
+export interface UserCreateOneWithoutPostsInput {
   create?: UserCreateWithoutPostsInput
   connect?: UserWhereUniqueInput
-  update?: UserUpdateWithoutPostsDataInput
-  upsert?: UserUpsertWithoutPostsInput
-}
-
-export interface UserUpsertWithoutPostsInput {
-  update: UserUpdateWithoutPostsDataInput
-  create: UserCreateWithoutPostsInput
-}
-
-export interface UserCreateWithoutHostInput {
-  login: String
-  name: String
-  password: String
-  role?: Role
-  posts?: PostCreateManyWithoutAuthorInput
 }
 
 export interface PostCreateInput {
@@ -1530,6 +2052,25 @@ export interface PostCreateInput {
   title: String
   text: String
   author: UserCreateOneWithoutPostsInput
+}
+
+export interface UserCreateInput {
+  login: String
+  name: String
+  password: String
+  role?: Role
+  posts?: PostCreateManyWithoutAuthorInput
+}
+
+export interface PostCreateManyWithoutAuthorInput {
+  create?: PostCreateWithoutAuthorInput[] | PostCreateWithoutAuthorInput
+  connect?: PostWhereUniqueInput[] | PostWhereUniqueInput
+}
+
+export interface PostUpsertWithWhereUniqueWithoutAuthorInput {
+  where: PostWhereUniqueInput
+  update: PostUpdateWithoutAuthorDataInput
+  create: PostCreateWithoutAuthorInput
 }
 
 export interface UserSubscriptionWhereInput {
@@ -1543,166 +2084,20 @@ export interface UserSubscriptionWhereInput {
   node?: UserWhereInput
 }
 
-export interface UserCreateOneWithoutPostsInput {
-  create?: UserCreateWithoutPostsInput
-  connect?: UserWhereUniqueInput
-}
-
-export interface PostWhereUniqueInput {
+export interface ApplicationWhereUniqueInput {
   id?: ID_Input
+  path?: String
 }
 
-export interface UserCreateWithoutPostsInput {
-  login: String
-  name: String
-  password: String
-  role?: Role
-  host?: HostCreateOneWithoutOwnerInput
-}
-
-export interface HostWhereUniqueInput {
-  id?: ID_Input
-  hostName?: String
-}
-
-export interface HostCreateOneWithoutOwnerInput {
-  create?: HostCreateWithoutOwnerInput
-  connect?: HostWhereUniqueInput
-}
-
-export interface UserUpdateWithoutHostDataInput {
-  login?: String
-  name?: String
-  password?: String
-  role?: Role
-  posts?: PostUpdateManyWithoutAuthorInput
-}
-
-export interface HostCreateWithoutOwnerInput {
-  hostName: String
-  publicKey?: String
-  timeZone?: String
-  tunnelPort?: Int
-}
-
-export interface HostUpdateInput {
-  hostName?: String
-  publicKey?: String
-  timeZone?: String
-  tunnelPort?: Int
-  owner?: UserUpdateOneRequiredWithoutHostInput
-}
-
-export interface HostUpsertWithoutOwnerInput {
-  update: HostUpdateWithoutOwnerDataInput
-  create: HostCreateWithoutOwnerInput
-}
-
-export interface PostUpdateWithoutAuthorDataInput {
-  isPublished?: Boolean
-  title?: String
-  text?: String
-}
-
-export interface PostCreateManyWithoutAuthorInput {
-  create?: PostCreateWithoutAuthorInput[] | PostCreateWithoutAuthorInput
-  connect?: PostWhereUniqueInput[] | PostWhereUniqueInput
-}
-
-export interface PostUpdateManyWithoutAuthorInput {
-  create?: PostCreateWithoutAuthorInput[] | PostCreateWithoutAuthorInput
-  connect?: PostWhereUniqueInput[] | PostWhereUniqueInput
-  disconnect?: PostWhereUniqueInput[] | PostWhereUniqueInput
-  delete?: PostWhereUniqueInput[] | PostWhereUniqueInput
-  update?: PostUpdateWithWhereUniqueWithoutAuthorInput[] | PostUpdateWithWhereUniqueWithoutAuthorInput
-  upsert?: PostUpsertWithWhereUniqueWithoutAuthorInput[] | PostUpsertWithWhereUniqueWithoutAuthorInput
-}
-
-export interface PostCreateWithoutAuthorInput {
-  isPublished?: Boolean
-  title: String
-  text: String
-}
-
-export interface PostSubscriptionWhereInput {
-  AND?: PostSubscriptionWhereInput[] | PostSubscriptionWhereInput
-  OR?: PostSubscriptionWhereInput[] | PostSubscriptionWhereInput
-  NOT?: PostSubscriptionWhereInput[] | PostSubscriptionWhereInput
+export interface ApplicationSubscriptionWhereInput {
+  AND?: ApplicationSubscriptionWhereInput[] | ApplicationSubscriptionWhereInput
+  OR?: ApplicationSubscriptionWhereInput[] | ApplicationSubscriptionWhereInput
+  NOT?: ApplicationSubscriptionWhereInput[] | ApplicationSubscriptionWhereInput
   mutation_in?: MutationType[] | MutationType
   updatedFields_contains?: String
   updatedFields_contains_every?: String[] | String
   updatedFields_contains_some?: String[] | String
-  node?: PostWhereInput
-}
-
-export interface UserUpsertWithoutHostInput {
-  update: UserUpdateWithoutHostDataInput
-  create: UserCreateWithoutHostInput
-}
-
-export interface PostUpdateInput {
-  isPublished?: Boolean
-  title?: String
-  text?: String
-  author?: UserUpdateOneRequiredWithoutPostsInput
-}
-
-export interface UserUpdateWithoutPostsDataInput {
-  login?: String
-  name?: String
-  password?: String
-  role?: Role
-  host?: HostUpdateOneWithoutOwnerInput
-}
-
-export interface HostUpdateOneWithoutOwnerInput {
-  create?: HostCreateWithoutOwnerInput
-  connect?: HostWhereUniqueInput
-  disconnect?: Boolean
-  delete?: Boolean
-  update?: HostUpdateWithoutOwnerDataInput
-  upsert?: HostUpsertWithoutOwnerInput
-}
-
-export interface HostUpdateWithoutOwnerDataInput {
-  hostName?: String
-  publicKey?: String
-  timeZone?: String
-  tunnelPort?: Int
-}
-
-export interface UserUpdateOneRequiredWithoutHostInput {
-  create?: UserCreateWithoutHostInput
-  connect?: UserWhereUniqueInput
-  update?: UserUpdateWithoutHostDataInput
-  upsert?: UserUpsertWithoutHostInput
-}
-
-export interface UserWhereUniqueInput {
-  id?: ID_Input
-  login?: String
-}
-
-export interface HostSubscriptionWhereInput {
-  AND?: HostSubscriptionWhereInput[] | HostSubscriptionWhereInput
-  OR?: HostSubscriptionWhereInput[] | HostSubscriptionWhereInput
-  NOT?: HostSubscriptionWhereInput[] | HostSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: HostWhereInput
-}
-
-export interface PostUpdateWithWhereUniqueWithoutAuthorInput {
-  where: PostWhereUniqueInput
-  data: PostUpdateWithoutAuthorDataInput
-}
-
-export interface PostUpsertWithWhereUniqueWithoutAuthorInput {
-  where: PostWhereUniqueInput
-  update: PostUpdateWithoutAuthorDataInput
-  create: PostCreateWithoutAuthorInput
+  node?: ApplicationWhereInput
 }
 
 /*
@@ -1713,26 +2108,8 @@ export interface Node {
   id: ID_Output
 }
 
-/*
- * A connection to a list of items.
-
- */
-export interface PostConnection {
-  pageInfo: PageInfo
-  edges: PostEdge[]
-  aggregate: AggregatePost
-}
-
-export interface HostPreviousValues {
-  id: ID_Output
-  hostName: String
-  publicKey?: String
-  timeZone: String
-  tunnelPort?: Int
-}
-
-export interface BatchPayload {
-  count: Long
+export interface AggregateApplication {
+  count: Int
 }
 
 export interface User extends Node {
@@ -1741,25 +2118,39 @@ export interface User extends Node {
   name: String
   password: String
   role?: Role
-  host?: Host
   posts?: Post[]
 }
 
-export interface Post extends Node {
+export interface ApplicationPreviousValues {
   id: ID_Output
-  createdAt: DateTime
-  updatedAt: DateTime
-  isPublished: Boolean
-  title: String
-  text: String
-  author: User
+  name: String
+  isSystem?: Boolean
+  path?: String
+  description?: String
+  repository?: String
 }
 
-export interface UserSubscriptionPayload {
-  mutation: MutationType
-  node?: User
-  updatedFields?: String[]
-  previousValues?: UserPreviousValues
+export interface BatchPayload {
+  count: Long
+}
+
+/*
+ * A connection to a list of items.
+
+ */
+export interface ApplicationConnection {
+  pageInfo: PageInfo
+  edges: ApplicationEdge[]
+  aggregate: AggregateApplication
+}
+
+/*
+ * An edge in a connection.
+
+ */
+export interface ApplicationEdge {
+  node: Application
+  cursor: String
 }
 
 export interface HostSubscriptionPayload {
@@ -1782,8 +2173,108 @@ export interface HostEdge {
   cursor: String
 }
 
+/*
+ * A connection to a list of items.
+
+ */
+export interface HostConnection {
+  pageInfo: PageInfo
+  edges: HostEdge[]
+  aggregate: AggregateHost
+}
+
+/*
+ * An edge in a connection.
+
+ */
+export interface UserEdge {
+  node: User
+  cursor: String
+}
+
+export interface Post extends Node {
+  id: ID_Output
+  createdAt: DateTime
+  updatedAt: DateTime
+  isPublished: Boolean
+  title: String
+  text: String
+  author: User
+}
+
+export interface AggregatePost {
+  count: Int
+}
+
+export interface ApplicationSubscriptionPayload {
+  mutation: MutationType
+  node?: Application
+  updatedFields?: String[]
+  previousValues?: ApplicationPreviousValues
+}
+
+/*
+ * Information about pagination in a connection.
+
+ */
+export interface PageInfo {
+  hasNextPage: Boolean
+  hasPreviousPage: Boolean
+  startCursor?: String
+  endCursor?: String
+}
+
+export interface PostSubscriptionPayload {
+  mutation: MutationType
+  node?: Post
+  updatedFields?: String[]
+  previousValues?: PostPreviousValues
+}
+
+export interface Application extends Node {
+  id: ID_Output
+  name: String
+  isSystem?: Boolean
+  path?: String
+  description?: String
+  repository?: String
+}
+
 export interface AggregateUser {
   count: Int
+}
+
+export interface UserPreviousValues {
+  id: ID_Output
+  login: String
+  name: String
+  password: String
+  role?: Role
+}
+
+export interface UserSubscriptionPayload {
+  mutation: MutationType
+  node?: User
+  updatedFields?: String[]
+  previousValues?: UserPreviousValues
+}
+
+export interface HostPreviousValues {
+  id: ID_Output
+  hostName: String
+  password: String
+  publicKey?: String
+  timeZone: String
+  tunnelPort?: Int
+}
+
+export interface PostPreviousValues {
+  id: ID_Output
+  createdAt: DateTime
+  updatedAt: DateTime
+  isPublished: Boolean
+  title: String
+  text: String
 }
 
 /*
@@ -1796,71 +2287,23 @@ export interface UserConnection {
   aggregate: AggregateUser
 }
 
-export interface PostPreviousValues {
-  id: ID_Output
-  createdAt: DateTime
-  updatedAt: DateTime
-  isPublished: Boolean
-  title: String
-  text: String
-}
-
-export interface PostSubscriptionPayload {
-  mutation: MutationType
-  node?: Post
-  updatedFields?: String[]
-  previousValues?: PostPreviousValues
-}
-
-export interface UserPreviousValues {
-  id: ID_Output
-  login: String
-  name: String
-  password: String
-  role?: Role
-}
-
 export interface Host extends Node {
   id: ID_Output
   hostName: String
-  owner: User
+  password: String
   publicKey?: String
   timeZone: String
   tunnelPort?: Int
-}
-
-export interface AggregatePost {
-  count: Int
-}
-
-/*
- * An edge in a connection.
-
- */
-export interface UserEdge {
-  node: User
-  cursor: String
 }
 
 /*
  * A connection to a list of items.
 
  */
-export interface HostConnection {
+export interface PostConnection {
   pageInfo: PageInfo
-  edges: HostEdge[]
-  aggregate: AggregateHost
-}
-
-/*
- * Information about pagination in a connection.
-
- */
-export interface PageInfo {
-  hasNextPage: Boolean
-  hasPreviousPage: Boolean
-  startCursor?: String
-  endCursor?: String
+  edges: PostEdge[]
+  aggregate: AggregatePost
 }
 
 /*
@@ -1879,20 +2322,15 @@ Long can represent values between -(2^63) and 2^63 - 1.
 export type Long = string
 
 /*
-The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
-*/
-export type Int = number
-
-/*
 The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
 */
 export type ID_Input = string | number
 export type ID_Output = string
 
 /*
-The `Boolean` scalar type represents `true` or `false`.
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
 */
-export type Boolean = boolean
+export type Int = number
 
 export type DateTime = Date | string
 
@@ -1900,3 +2338,8 @@ export type DateTime = Date | string
 The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
 */
 export type String = string
+
+/*
+The `Boolean` scalar type represents `true` or `false`.
+*/
+export type Boolean = boolean

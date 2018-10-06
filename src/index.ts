@@ -2,6 +2,7 @@ import { GraphQLServer } from 'graphql-yoga'
 import { Prisma } from './generated/prisma'
 import getUser from './authorization/getUser'
 import resolvers from './resolvers'
+import { hostSettings } from './rest'
 // import directiveResolvers from './directiveResolvers'
 import permissions from './authorization/permissions';
 const db = new Prisma({
@@ -19,4 +20,5 @@ const server = new GraphQLServer({
     db
   }),
 })
+server.express.get('/host-settings', (req, res, next) => hostSettings(req, res, next, db))
 server.start({port: 5000}, () => console.log(`Server is running on http://localhost:5000`))
