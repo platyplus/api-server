@@ -1,18 +1,7 @@
-import { Context } from '../utils'
+// import { TypeMap } from './types/TypeMap'
 
-export const Subscription = {
-  feedSubscription: {
-    subscribe: (parent, args, ctx: Context, info) => {
-      return ctx.db.subscription.post(
-        {
-          where: {
-            node: {
-              isPublished: true,
-            },
-          },
-        },
-        info,
-      )
-    },
-  },
-}
+// export interface SubscriptionParent {}
+
+// export const Subscription: SubscriptionResolvers.Type<TypeMap> = {
+
+// }

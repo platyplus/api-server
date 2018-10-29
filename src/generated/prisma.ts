@@ -4,60 +4,38 @@ import { Options } from 'graphql-binding'
 import { makePrismaBindingClass, BasePrismaOptions } from 'prisma-binding'
 
 export interface Query {
-    posts: <T = Post[]>(args: { where?: PostWhereInput, orderBy?: PostOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    users: <T = User[]>(args: { where?: UserWhereInput, orderBy?: UserOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     hosts: <T = Host[]>(args: { where?: HostWhereInput, orderBy?: HostOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    applications: <T = Application[]>(args: { where?: ApplicationWhereInput, orderBy?: ApplicationOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    post: <T = Post | null>(args: { where: PostWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    user: <T = User | null>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    users: <T = User[]>(args: { where?: UserWhereInput, orderBy?: UserOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     host: <T = Host | null>(args: { where: HostWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    application: <T = Application | null>(args: { where: ApplicationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    postsConnection: <T = PostConnection>(args: { where?: PostWhereInput, orderBy?: PostOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    usersConnection: <T = UserConnection>(args: { where?: UserWhereInput, orderBy?: UserOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    user: <T = User | null>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     hostsConnection: <T = HostConnection>(args: { where?: HostWhereInput, orderBy?: HostOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    applicationsConnection: <T = ApplicationConnection>(args: { where?: ApplicationWhereInput, orderBy?: ApplicationOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    usersConnection: <T = UserConnection>(args: { where?: UserWhereInput, orderBy?: UserOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     node: <T = Node | null>(args: { id: ID_Output }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> 
   }
 
 export interface Mutation {
-    createPost: <T = Post>(args: { data: PostCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    createUser: <T = User>(args: { data: UserCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createHost: <T = Host>(args: { data: HostCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    createApplication: <T = Application>(args: { data: ApplicationCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    updatePost: <T = Post | null>(args: { data: PostUpdateInput, where: PostWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    updateUser: <T = User | null>(args: { data: UserUpdateInput, where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    createUser: <T = User>(args: { data: UserCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateHost: <T = Host | null>(args: { data: HostUpdateInput, where: HostWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    updateApplication: <T = Application | null>(args: { data: ApplicationUpdateInput, where: ApplicationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    deletePost: <T = Post | null>(args: { where: PostWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    deleteUser: <T = User | null>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateUser: <T = User | null>(args: { data: UserUpdateInput, where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteHost: <T = Host | null>(args: { where: HostWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    deleteApplication: <T = Application | null>(args: { where: ApplicationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    upsertPost: <T = Post>(args: { where: PostWhereUniqueInput, create: PostCreateInput, update: PostUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    upsertUser: <T = User>(args: { where: UserWhereUniqueInput, create: UserCreateInput, update: UserUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteUser: <T = User | null>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertHost: <T = Host>(args: { where: HostWhereUniqueInput, create: HostCreateInput, update: HostUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    upsertApplication: <T = Application>(args: { where: ApplicationWhereUniqueInput, create: ApplicationCreateInput, update: ApplicationUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    updateManyPosts: <T = BatchPayload>(args: { data: PostUpdateInput, where?: PostWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    updateManyUsers: <T = BatchPayload>(args: { data: UserUpdateInput, where?: UserWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    updateManyHosts: <T = BatchPayload>(args: { data: HostUpdateInput, where?: HostWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    updateManyApplications: <T = BatchPayload>(args: { data: ApplicationUpdateInput, where?: ApplicationWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    deleteManyPosts: <T = BatchPayload>(args: { where?: PostWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    deleteManyUsers: <T = BatchPayload>(args: { where?: UserWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertUser: <T = User>(args: { where: UserWhereUniqueInput, create: UserCreateInput, update: UserUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateManyHosts: <T = BatchPayload>(args: { data: HostUpdateManyInput, where?: HostWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateManyUsers: <T = BatchPayload>(args: { data: UserUpdateManyInput, where?: UserWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyHosts: <T = BatchPayload>(args: { where?: HostWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    deleteManyApplications: <T = BatchPayload>(args: { where?: ApplicationWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> 
+    deleteManyUsers: <T = BatchPayload>(args: { where?: UserWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> 
   }
 
 export interface Subscription {
-    post: <T = PostSubscriptionPayload | null>(args: { where?: PostSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> ,
-    user: <T = UserSubscriptionPayload | null>(args: { where?: UserSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> ,
     host: <T = HostSubscriptionPayload | null>(args: { where?: HostSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> ,
-    application: <T = ApplicationSubscriptionPayload | null>(args: { where?: ApplicationSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> 
+    user: <T = UserSubscriptionPayload | null>(args: { where?: UserSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> 
   }
 
 export interface Exists {
-  Post: (where?: PostWhereInput) => Promise<boolean>
-  User: (where?: UserWhereInput) => Promise<boolean>
   Host: (where?: HostWhereInput) => Promise<boolean>
-  Application: (where?: ApplicationWhereInput) => Promise<boolean>
+  User: (where?: UserWhereInput) => Promise<boolean>
 }
 
 export interface Prisma {
@@ -82,15 +60,7 @@ export interface BindingConstructor<T> {
  * Type Defs
 */
 
-const typeDefs = `type AggregateApplication {
-  count: Int!
-}
-
-type AggregateHost {
-  count: Int!
-}
-
-type AggregatePost {
+const typeDefs = `type AggregateHost {
   count: Int!
 }
 
@@ -98,349 +68,17 @@ type AggregateUser {
   count: Int!
 }
 
-type Application implements Node {
-  id: ID!
-  name: String!
-  isSystem: Boolean
-  path: String
-  description: String
-  repository: String
-}
-
-"""A connection to a list of items."""
-type ApplicationConnection {
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """A list of edges."""
-  edges: [ApplicationEdge]!
-  aggregate: AggregateApplication!
-}
-
-input ApplicationCreateInput {
-  name: String!
-  isSystem: Boolean
-  path: String
-  description: String
-  repository: String
-}
-
-"""An edge in a connection."""
-type ApplicationEdge {
-  """The item at the end of the edge."""
-  node: Application!
-
-  """A cursor for use in pagination."""
-  cursor: String!
-}
-
-enum ApplicationOrderByInput {
-  id_ASC
-  id_DESC
-  name_ASC
-  name_DESC
-  isSystem_ASC
-  isSystem_DESC
-  path_ASC
-  path_DESC
-  description_ASC
-  description_DESC
-  repository_ASC
-  repository_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  createdAt_ASC
-  createdAt_DESC
-}
-
-type ApplicationPreviousValues {
-  id: ID!
-  name: String!
-  isSystem: Boolean
-  path: String
-  description: String
-  repository: String
-}
-
-type ApplicationSubscriptionPayload {
-  mutation: MutationType!
-  node: Application
-  updatedFields: [String!]
-  previousValues: ApplicationPreviousValues
-}
-
-input ApplicationSubscriptionWhereInput {
-  """Logical AND on all given filters."""
-  AND: [ApplicationSubscriptionWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [ApplicationSubscriptionWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [ApplicationSubscriptionWhereInput!]
-
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
-  mutation_in: [MutationType!]
-
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
-  updatedFields_contains: String
-
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
-  updatedFields_contains_every: [String!]
-
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
-  updatedFields_contains_some: [String!]
-  node: ApplicationWhereInput
-}
-
-input ApplicationUpdateInput {
-  name: String
-  isSystem: Boolean
-  path: String
-  description: String
-  repository: String
-}
-
-input ApplicationWhereInput {
-  """Logical AND on all given filters."""
-  AND: [ApplicationWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [ApplicationWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [ApplicationWhereInput!]
-  id: ID
-
-  """All values that are not equal to given value."""
-  id_not: ID
-
-  """All values that are contained in given list."""
-  id_in: [ID!]
-
-  """All values that are not contained in given list."""
-  id_not_in: [ID!]
-
-  """All values less than the given value."""
-  id_lt: ID
-
-  """All values less than or equal the given value."""
-  id_lte: ID
-
-  """All values greater than the given value."""
-  id_gt: ID
-
-  """All values greater than or equal the given value."""
-  id_gte: ID
-
-  """All values containing the given string."""
-  id_contains: ID
-
-  """All values not containing the given string."""
-  id_not_contains: ID
-
-  """All values starting with the given string."""
-  id_starts_with: ID
-
-  """All values not starting with the given string."""
-  id_not_starts_with: ID
-
-  """All values ending with the given string."""
-  id_ends_with: ID
-
-  """All values not ending with the given string."""
-  id_not_ends_with: ID
-  name: String
-
-  """All values that are not equal to given value."""
-  name_not: String
-
-  """All values that are contained in given list."""
-  name_in: [String!]
-
-  """All values that are not contained in given list."""
-  name_not_in: [String!]
-
-  """All values less than the given value."""
-  name_lt: String
-
-  """All values less than or equal the given value."""
-  name_lte: String
-
-  """All values greater than the given value."""
-  name_gt: String
-
-  """All values greater than or equal the given value."""
-  name_gte: String
-
-  """All values containing the given string."""
-  name_contains: String
-
-  """All values not containing the given string."""
-  name_not_contains: String
-
-  """All values starting with the given string."""
-  name_starts_with: String
-
-  """All values not starting with the given string."""
-  name_not_starts_with: String
-
-  """All values ending with the given string."""
-  name_ends_with: String
-
-  """All values not ending with the given string."""
-  name_not_ends_with: String
-  isSystem: Boolean
-
-  """All values that are not equal to given value."""
-  isSystem_not: Boolean
-  path: String
-
-  """All values that are not equal to given value."""
-  path_not: String
-
-  """All values that are contained in given list."""
-  path_in: [String!]
-
-  """All values that are not contained in given list."""
-  path_not_in: [String!]
-
-  """All values less than the given value."""
-  path_lt: String
-
-  """All values less than or equal the given value."""
-  path_lte: String
-
-  """All values greater than the given value."""
-  path_gt: String
-
-  """All values greater than or equal the given value."""
-  path_gte: String
-
-  """All values containing the given string."""
-  path_contains: String
-
-  """All values not containing the given string."""
-  path_not_contains: String
-
-  """All values starting with the given string."""
-  path_starts_with: String
-
-  """All values not starting with the given string."""
-  path_not_starts_with: String
-
-  """All values ending with the given string."""
-  path_ends_with: String
-
-  """All values not ending with the given string."""
-  path_not_ends_with: String
-  description: String
-
-  """All values that are not equal to given value."""
-  description_not: String
-
-  """All values that are contained in given list."""
-  description_in: [String!]
-
-  """All values that are not contained in given list."""
-  description_not_in: [String!]
-
-  """All values less than the given value."""
-  description_lt: String
-
-  """All values less than or equal the given value."""
-  description_lte: String
-
-  """All values greater than the given value."""
-  description_gt: String
-
-  """All values greater than or equal the given value."""
-  description_gte: String
-
-  """All values containing the given string."""
-  description_contains: String
-
-  """All values not containing the given string."""
-  description_not_contains: String
-
-  """All values starting with the given string."""
-  description_starts_with: String
-
-  """All values not starting with the given string."""
-  description_not_starts_with: String
-
-  """All values ending with the given string."""
-  description_ends_with: String
-
-  """All values not ending with the given string."""
-  description_not_ends_with: String
-  repository: String
-
-  """All values that are not equal to given value."""
-  repository_not: String
-
-  """All values that are contained in given list."""
-  repository_in: [String!]
-
-  """All values that are not contained in given list."""
-  repository_not_in: [String!]
-
-  """All values less than the given value."""
-  repository_lt: String
-
-  """All values less than or equal the given value."""
-  repository_lte: String
-
-  """All values greater than the given value."""
-  repository_gt: String
-
-  """All values greater than or equal the given value."""
-  repository_gte: String
-
-  """All values containing the given string."""
-  repository_contains: String
-
-  """All values not containing the given string."""
-  repository_not_contains: String
-
-  """All values starting with the given string."""
-  repository_starts_with: String
-
-  """All values not starting with the given string."""
-  repository_not_starts_with: String
-
-  """All values ending with the given string."""
-  repository_ends_with: String
-
-  """All values not ending with the given string."""
-  repository_not_ends_with: String
-}
-
-input ApplicationWhereUniqueInput {
-  id: ID
-  path: String
-}
-
 type BatchPayload {
   """The number of nodes that have been affected by the Batch operation."""
   count: Long!
 }
-
-scalar DateTime
 
 type Host implements Node {
   id: ID!
   hostName: String!
   password: String!
   publicKey: String
+  owner: User
   timeZone: String!
   tunnelPort: Int
 }
@@ -461,6 +99,7 @@ input HostCreateInput {
   publicKey: String
   timeZone: String
   tunnelPort: Int
+  owner: UserCreateOneInput
 }
 
 """An edge in a connection."""
@@ -540,6 +179,15 @@ input HostSubscriptionWhereInput {
 }
 
 input HostUpdateInput {
+  hostName: String
+  password: String
+  publicKey: String
+  timeZone: String
+  tunnelPort: Int
+  owner: UserUpdateOneInput
+}
+
+input HostUpdateManyInput {
   hostName: String
   password: String
   publicKey: String
@@ -778,6 +426,7 @@ input HostWhereInput {
 
   """All values greater than or equal the given value."""
   tunnelPort_gte: Int
+  owner: UserWhereInput
 }
 
 input HostWhereUniqueInput {
@@ -792,30 +441,18 @@ Long can represent values between -(2^63) and 2^63 - 1.
 scalar Long
 
 type Mutation {
-  createPost(data: PostCreateInput!): Post!
-  createUser(data: UserCreateInput!): User!
   createHost(data: HostCreateInput!): Host!
-  createApplication(data: ApplicationCreateInput!): Application!
-  updatePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post
-  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  createUser(data: UserCreateInput!): User!
   updateHost(data: HostUpdateInput!, where: HostWhereUniqueInput!): Host
-  updateApplication(data: ApplicationUpdateInput!, where: ApplicationWhereUniqueInput!): Application
-  deletePost(where: PostWhereUniqueInput!): Post
-  deleteUser(where: UserWhereUniqueInput!): User
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   deleteHost(where: HostWhereUniqueInput!): Host
-  deleteApplication(where: ApplicationWhereUniqueInput!): Application
-  upsertPost(where: PostWhereUniqueInput!, create: PostCreateInput!, update: PostUpdateInput!): Post!
-  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  deleteUser(where: UserWhereUniqueInput!): User
   upsertHost(where: HostWhereUniqueInput!, create: HostCreateInput!, update: HostUpdateInput!): Host!
-  upsertApplication(where: ApplicationWhereUniqueInput!, create: ApplicationCreateInput!, update: ApplicationUpdateInput!): Application!
-  updateManyPosts(data: PostUpdateInput!, where: PostWhereInput): BatchPayload!
-  updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
-  updateManyHosts(data: HostUpdateInput!, where: HostWhereInput): BatchPayload!
-  updateManyApplications(data: ApplicationUpdateInput!, where: ApplicationWhereInput): BatchPayload!
-  deleteManyPosts(where: PostWhereInput): BatchPayload!
-  deleteManyUsers(where: UserWhereInput): BatchPayload!
+  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  updateManyHosts(data: HostUpdateManyInput!, where: HostWhereInput): BatchPayload!
+  updateManyUsers(data: UserUpdateManyInput!, where: UserWhereInput): BatchPayload!
   deleteManyHosts(where: HostWhereInput): BatchPayload!
-  deleteManyApplications(where: ApplicationWhereInput): BatchPayload!
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -845,346 +482,13 @@ type PageInfo {
   endCursor: String
 }
 
-type Post implements Node {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  isPublished: Boolean!
-  title: String!
-  text: String!
-  author: User!
-}
-
-"""A connection to a list of items."""
-type PostConnection {
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """A list of edges."""
-  edges: [PostEdge]!
-  aggregate: AggregatePost!
-}
-
-input PostCreateInput {
-  isPublished: Boolean
-  title: String!
-  text: String!
-  author: UserCreateOneWithoutPostsInput!
-}
-
-input PostCreateManyWithoutAuthorInput {
-  create: [PostCreateWithoutAuthorInput!]
-  connect: [PostWhereUniqueInput!]
-}
-
-input PostCreateWithoutAuthorInput {
-  isPublished: Boolean
-  title: String!
-  text: String!
-}
-
-"""An edge in a connection."""
-type PostEdge {
-  """The item at the end of the edge."""
-  node: Post!
-
-  """A cursor for use in pagination."""
-  cursor: String!
-}
-
-enum PostOrderByInput {
-  id_ASC
-  id_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  isPublished_ASC
-  isPublished_DESC
-  title_ASC
-  title_DESC
-  text_ASC
-  text_DESC
-}
-
-type PostPreviousValues {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  isPublished: Boolean!
-  title: String!
-  text: String!
-}
-
-type PostSubscriptionPayload {
-  mutation: MutationType!
-  node: Post
-  updatedFields: [String!]
-  previousValues: PostPreviousValues
-}
-
-input PostSubscriptionWhereInput {
-  """Logical AND on all given filters."""
-  AND: [PostSubscriptionWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [PostSubscriptionWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [PostSubscriptionWhereInput!]
-
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
-  mutation_in: [MutationType!]
-
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
-  updatedFields_contains: String
-
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
-  updatedFields_contains_every: [String!]
-
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
-  updatedFields_contains_some: [String!]
-  node: PostWhereInput
-}
-
-input PostUpdateInput {
-  isPublished: Boolean
-  title: String
-  text: String
-  author: UserUpdateOneRequiredWithoutPostsInput
-}
-
-input PostUpdateManyWithoutAuthorInput {
-  create: [PostCreateWithoutAuthorInput!]
-  connect: [PostWhereUniqueInput!]
-  disconnect: [PostWhereUniqueInput!]
-  delete: [PostWhereUniqueInput!]
-  update: [PostUpdateWithWhereUniqueWithoutAuthorInput!]
-  upsert: [PostUpsertWithWhereUniqueWithoutAuthorInput!]
-}
-
-input PostUpdateWithoutAuthorDataInput {
-  isPublished: Boolean
-  title: String
-  text: String
-}
-
-input PostUpdateWithWhereUniqueWithoutAuthorInput {
-  where: PostWhereUniqueInput!
-  data: PostUpdateWithoutAuthorDataInput!
-}
-
-input PostUpsertWithWhereUniqueWithoutAuthorInput {
-  where: PostWhereUniqueInput!
-  update: PostUpdateWithoutAuthorDataInput!
-  create: PostCreateWithoutAuthorInput!
-}
-
-input PostWhereInput {
-  """Logical AND on all given filters."""
-  AND: [PostWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [PostWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [PostWhereInput!]
-  id: ID
-
-  """All values that are not equal to given value."""
-  id_not: ID
-
-  """All values that are contained in given list."""
-  id_in: [ID!]
-
-  """All values that are not contained in given list."""
-  id_not_in: [ID!]
-
-  """All values less than the given value."""
-  id_lt: ID
-
-  """All values less than or equal the given value."""
-  id_lte: ID
-
-  """All values greater than the given value."""
-  id_gt: ID
-
-  """All values greater than or equal the given value."""
-  id_gte: ID
-
-  """All values containing the given string."""
-  id_contains: ID
-
-  """All values not containing the given string."""
-  id_not_contains: ID
-
-  """All values starting with the given string."""
-  id_starts_with: ID
-
-  """All values not starting with the given string."""
-  id_not_starts_with: ID
-
-  """All values ending with the given string."""
-  id_ends_with: ID
-
-  """All values not ending with the given string."""
-  id_not_ends_with: ID
-  createdAt: DateTime
-
-  """All values that are not equal to given value."""
-  createdAt_not: DateTime
-
-  """All values that are contained in given list."""
-  createdAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  createdAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  createdAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  createdAt_lte: DateTime
-
-  """All values greater than the given value."""
-  createdAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-
-  """All values that are not equal to given value."""
-  updatedAt_not: DateTime
-
-  """All values that are contained in given list."""
-  updatedAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  updatedAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  updatedAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  updatedAt_lte: DateTime
-
-  """All values greater than the given value."""
-  updatedAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  updatedAt_gte: DateTime
-  isPublished: Boolean
-
-  """All values that are not equal to given value."""
-  isPublished_not: Boolean
-  title: String
-
-  """All values that are not equal to given value."""
-  title_not: String
-
-  """All values that are contained in given list."""
-  title_in: [String!]
-
-  """All values that are not contained in given list."""
-  title_not_in: [String!]
-
-  """All values less than the given value."""
-  title_lt: String
-
-  """All values less than or equal the given value."""
-  title_lte: String
-
-  """All values greater than the given value."""
-  title_gt: String
-
-  """All values greater than or equal the given value."""
-  title_gte: String
-
-  """All values containing the given string."""
-  title_contains: String
-
-  """All values not containing the given string."""
-  title_not_contains: String
-
-  """All values starting with the given string."""
-  title_starts_with: String
-
-  """All values not starting with the given string."""
-  title_not_starts_with: String
-
-  """All values ending with the given string."""
-  title_ends_with: String
-
-  """All values not ending with the given string."""
-  title_not_ends_with: String
-  text: String
-
-  """All values that are not equal to given value."""
-  text_not: String
-
-  """All values that are contained in given list."""
-  text_in: [String!]
-
-  """All values that are not contained in given list."""
-  text_not_in: [String!]
-
-  """All values less than the given value."""
-  text_lt: String
-
-  """All values less than or equal the given value."""
-  text_lte: String
-
-  """All values greater than the given value."""
-  text_gt: String
-
-  """All values greater than or equal the given value."""
-  text_gte: String
-
-  """All values containing the given string."""
-  text_contains: String
-
-  """All values not containing the given string."""
-  text_not_contains: String
-
-  """All values starting with the given string."""
-  text_starts_with: String
-
-  """All values not starting with the given string."""
-  text_not_starts_with: String
-
-  """All values ending with the given string."""
-  text_ends_with: String
-
-  """All values not ending with the given string."""
-  text_not_ends_with: String
-  author: UserWhereInput
-}
-
-input PostWhereUniqueInput {
-  id: ID
-}
-
 type Query {
-  posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post]!
-  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   hosts(where: HostWhereInput, orderBy: HostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Host]!
-  applications(where: ApplicationWhereInput, orderBy: ApplicationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Application]!
-  post(where: PostWhereUniqueInput!): Post
-  user(where: UserWhereUniqueInput!): User
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   host(where: HostWhereUniqueInput!): Host
-  application(where: ApplicationWhereUniqueInput!): Application
-  postsConnection(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PostConnection!
-  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  user(where: UserWhereUniqueInput!): User
   hostsConnection(where: HostWhereInput, orderBy: HostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): HostConnection!
-  applicationsConnection(where: ApplicationWhereInput, orderBy: ApplicationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ApplicationConnection!
+  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -1199,10 +503,8 @@ enum Role {
 }
 
 type Subscription {
-  post(where: PostSubscriptionWhereInput): PostSubscriptionPayload
-  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   host(where: HostSubscriptionWhereInput): HostSubscriptionPayload
-  application(where: ApplicationSubscriptionWhereInput): ApplicationSubscriptionPayload
+  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }
 
 type User implements Node {
@@ -1211,7 +513,6 @@ type User implements Node {
   name: String!
   password: String!
   role: Role
-  posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post!]
 }
 
 """A connection to a list of items."""
@@ -1229,19 +530,11 @@ input UserCreateInput {
   name: String!
   password: String!
   role: Role
-  posts: PostCreateManyWithoutAuthorInput
 }
 
-input UserCreateOneWithoutPostsInput {
-  create: UserCreateWithoutPostsInput
+input UserCreateOneInput {
+  create: UserCreateInput
   connect: UserWhereUniqueInput
-}
-
-input UserCreateWithoutPostsInput {
-  login: String!
-  name: String!
-  password: String!
-  role: Role
 }
 
 """An edge in a connection."""
@@ -1317,31 +610,39 @@ input UserSubscriptionWhereInput {
   node: UserWhereInput
 }
 
+input UserUpdateDataInput {
+  login: String
+  name: String
+  password: String
+  role: Role
+}
+
 input UserUpdateInput {
   login: String
   name: String
   password: String
   role: Role
-  posts: PostUpdateManyWithoutAuthorInput
 }
 
-input UserUpdateOneRequiredWithoutPostsInput {
-  create: UserCreateWithoutPostsInput
-  connect: UserWhereUniqueInput
-  update: UserUpdateWithoutPostsDataInput
-  upsert: UserUpsertWithoutPostsInput
-}
-
-input UserUpdateWithoutPostsDataInput {
+input UserUpdateManyInput {
   login: String
   name: String
   password: String
   role: Role
 }
 
-input UserUpsertWithoutPostsInput {
-  update: UserUpdateWithoutPostsDataInput!
-  create: UserCreateWithoutPostsInput!
+input UserUpdateOneInput {
+  create: UserCreateInput
+  connect: UserWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: UserUpdateDataInput
+  upsert: UserUpsertNestedInput
+}
+
+input UserUpsertNestedInput {
+  update: UserUpdateDataInput!
+  create: UserCreateInput!
 }
 
 input UserWhereInput {
@@ -1523,9 +824,6 @@ input UserWhereInput {
 
   """All values that are not contained in given list."""
   role_not_in: [Role!]
-  posts_every: PostWhereInput
-  posts_some: PostWhereInput
-  posts_none: PostWhereInput
 }
 
 input UserWhereUniqueInput {
@@ -1540,22 +838,22 @@ export const Prisma = makePrismaBindingClass<BindingConstructor<Prisma>>({typeDe
  * Types
 */
 
-export type MutationType =   'CREATED' |
-  'UPDATED' |
-  'DELETED'
-
-export type PostOrderByInput =   'id_ASC' |
+export type HostOrderByInput =   'id_ASC' |
   'id_DESC' |
-  'createdAt_ASC' |
-  'createdAt_DESC' |
+  'hostName_ASC' |
+  'hostName_DESC' |
+  'password_ASC' |
+  'password_DESC' |
+  'publicKey_ASC' |
+  'publicKey_DESC' |
+  'timeZone_ASC' |
+  'timeZone_DESC' |
+  'tunnelPort_ASC' |
+  'tunnelPort_DESC' |
   'updatedAt_ASC' |
   'updatedAt_DESC' |
-  'isPublished_ASC' |
-  'isPublished_DESC' |
-  'title_ASC' |
-  'title_DESC' |
-  'text_ASC' |
-  'text_DESC'
+  'createdAt_ASC' |
+  'createdAt_DESC'
 
 export type Role =   'ADMIN' |
   'USER'
@@ -1575,142 +873,22 @@ export type UserOrderByInput =   'id_ASC' |
   'createdAt_ASC' |
   'createdAt_DESC'
 
-export type HostOrderByInput =   'id_ASC' |
-  'id_DESC' |
-  'hostName_ASC' |
-  'hostName_DESC' |
-  'password_ASC' |
-  'password_DESC' |
-  'publicKey_ASC' |
-  'publicKey_DESC' |
-  'timeZone_ASC' |
-  'timeZone_DESC' |
-  'tunnelPort_ASC' |
-  'tunnelPort_DESC' |
-  'updatedAt_ASC' |
-  'updatedAt_DESC' |
-  'createdAt_ASC' |
-  'createdAt_DESC'
+export type MutationType =   'CREATED' |
+  'UPDATED' |
+  'DELETED'
 
-export type ApplicationOrderByInput =   'id_ASC' |
-  'id_DESC' |
-  'name_ASC' |
-  'name_DESC' |
-  'isSystem_ASC' |
-  'isSystem_DESC' |
-  'path_ASC' |
-  'path_DESC' |
-  'description_ASC' |
-  'description_DESC' |
-  'repository_ASC' |
-  'repository_DESC' |
-  'updatedAt_ASC' |
-  'updatedAt_DESC' |
-  'createdAt_ASC' |
-  'createdAt_DESC'
-
-export interface UserWhereUniqueInput {
+export interface HostWhereUniqueInput {
   id?: ID_Input
-  login?: String
+  hostName?: String
 }
 
-export interface UserCreateWithoutPostsInput {
-  login: String
-  name: String
+export interface HostCreateInput {
+  hostName: String
   password: String
-  role?: Role
-}
-
-export interface PostUpdateWithWhereUniqueWithoutAuthorInput {
-  where: PostWhereUniqueInput
-  data: PostUpdateWithoutAuthorDataInput
-}
-
-export interface PostWhereInput {
-  AND?: PostWhereInput[] | PostWhereInput
-  OR?: PostWhereInput[] | PostWhereInput
-  NOT?: PostWhereInput[] | PostWhereInput
-  id?: ID_Input
-  id_not?: ID_Input
-  id_in?: ID_Input[] | ID_Input
-  id_not_in?: ID_Input[] | ID_Input
-  id_lt?: ID_Input
-  id_lte?: ID_Input
-  id_gt?: ID_Input
-  id_gte?: ID_Input
-  id_contains?: ID_Input
-  id_not_contains?: ID_Input
-  id_starts_with?: ID_Input
-  id_not_starts_with?: ID_Input
-  id_ends_with?: ID_Input
-  id_not_ends_with?: ID_Input
-  createdAt?: DateTime
-  createdAt_not?: DateTime
-  createdAt_in?: DateTime[] | DateTime
-  createdAt_not_in?: DateTime[] | DateTime
-  createdAt_lt?: DateTime
-  createdAt_lte?: DateTime
-  createdAt_gt?: DateTime
-  createdAt_gte?: DateTime
-  updatedAt?: DateTime
-  updatedAt_not?: DateTime
-  updatedAt_in?: DateTime[] | DateTime
-  updatedAt_not_in?: DateTime[] | DateTime
-  updatedAt_lt?: DateTime
-  updatedAt_lte?: DateTime
-  updatedAt_gt?: DateTime
-  updatedAt_gte?: DateTime
-  isPublished?: Boolean
-  isPublished_not?: Boolean
-  title?: String
-  title_not?: String
-  title_in?: String[] | String
-  title_not_in?: String[] | String
-  title_lt?: String
-  title_lte?: String
-  title_gt?: String
-  title_gte?: String
-  title_contains?: String
-  title_not_contains?: String
-  title_starts_with?: String
-  title_not_starts_with?: String
-  title_ends_with?: String
-  title_not_ends_with?: String
-  text?: String
-  text_not?: String
-  text_in?: String[] | String
-  text_not_in?: String[] | String
-  text_lt?: String
-  text_lte?: String
-  text_gt?: String
-  text_gte?: String
-  text_contains?: String
-  text_not_contains?: String
-  text_starts_with?: String
-  text_not_starts_with?: String
-  text_ends_with?: String
-  text_not_ends_with?: String
-  author?: UserWhereInput
-}
-
-export interface PostUpdateManyWithoutAuthorInput {
-  create?: PostCreateWithoutAuthorInput[] | PostCreateWithoutAuthorInput
-  connect?: PostWhereUniqueInput[] | PostWhereUniqueInput
-  disconnect?: PostWhereUniqueInput[] | PostWhereUniqueInput
-  delete?: PostWhereUniqueInput[] | PostWhereUniqueInput
-  update?: PostUpdateWithWhereUniqueWithoutAuthorInput[] | PostUpdateWithWhereUniqueWithoutAuthorInput
-  upsert?: PostUpsertWithWhereUniqueWithoutAuthorInput[] | PostUpsertWithWhereUniqueWithoutAuthorInput
-}
-
-export interface PostSubscriptionWhereInput {
-  AND?: PostSubscriptionWhereInput[] | PostSubscriptionWhereInput
-  OR?: PostSubscriptionWhereInput[] | PostSubscriptionWhereInput
-  NOT?: PostSubscriptionWhereInput[] | PostSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: PostWhereInput
+  publicKey?: String
+  timeZone?: String
+  tunnelPort?: Int
+  owner?: UserCreateOneInput
 }
 
 export interface UserUpdateInput {
@@ -1718,20 +896,6 @@ export interface UserUpdateInput {
   name?: String
   password?: String
   role?: Role
-  posts?: PostUpdateManyWithoutAuthorInput
-}
-
-export interface ApplicationUpdateInput {
-  name?: String
-  isSystem?: Boolean
-  path?: String
-  description?: String
-  repository?: String
-}
-
-export interface UserUpsertWithoutPostsInput {
-  update: UserUpdateWithoutPostsDataInput
-  create: UserCreateWithoutPostsInput
 }
 
 export interface HostWhereInput {
@@ -1816,28 +980,12 @@ export interface HostWhereInput {
   tunnelPort_lte?: Int
   tunnelPort_gt?: Int
   tunnelPort_gte?: Int
+  owner?: UserWhereInput
 }
 
-export interface UserUpdateWithoutPostsDataInput {
-  login?: String
-  name?: String
-  password?: String
-  role?: Role
-}
-
-export interface HostUpdateInput {
-  hostName?: String
-  password?: String
-  publicKey?: String
-  timeZone?: String
-  tunnelPort?: Int
-}
-
-export interface UserUpdateOneRequiredWithoutPostsInput {
-  create?: UserCreateWithoutPostsInput
-  connect?: UserWhereUniqueInput
-  update?: UserUpdateWithoutPostsDataInput
-  upsert?: UserUpsertWithoutPostsInput
+export interface UserUpsertNestedInput {
+  update: UserUpdateDataInput
+  create: UserCreateInput
 }
 
 export interface HostSubscriptionWhereInput {
@@ -1851,48 +999,64 @@ export interface HostSubscriptionWhereInput {
   node?: HostWhereInput
 }
 
-export interface PostUpdateInput {
-  isPublished?: Boolean
-  title?: String
-  text?: String
-  author?: UserUpdateOneRequiredWithoutPostsInput
+export interface UserUpdateDataInput {
+  login?: String
+  name?: String
+  password?: String
+  role?: Role
 }
 
-export interface PostWhereUniqueInput {
-  id?: ID_Input
+export interface UserUpdateManyInput {
+  login?: String
+  name?: String
+  password?: String
+  role?: Role
 }
 
-export interface ApplicationCreateInput {
+export interface UserSubscriptionWhereInput {
+  AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
+  OR?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
+  NOT?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: UserWhereInput
+}
+
+export interface UserCreateOneInput {
+  create?: UserCreateInput
+  connect?: UserWhereUniqueInput
+}
+
+export interface UserCreateInput {
+  login: String
   name: String
-  isSystem?: Boolean
-  path?: String
-  description?: String
-  repository?: String
-}
-
-export interface HostWhereUniqueInput {
-  id?: ID_Input
-  hostName?: String
-}
-
-export interface HostCreateInput {
-  hostName: String
   password: String
+  role?: Role
+}
+
+export interface HostUpdateInput {
+  hostName?: String
+  password?: String
   publicKey?: String
   timeZone?: String
   tunnelPort?: Int
+  owner?: UserUpdateOneInput
 }
 
-export interface PostUpdateWithoutAuthorDataInput {
-  isPublished?: Boolean
-  title?: String
-  text?: String
+export interface UserUpdateOneInput {
+  create?: UserCreateInput
+  connect?: UserWhereUniqueInput
+  disconnect?: Boolean
+  delete?: Boolean
+  update?: UserUpdateDataInput
+  upsert?: UserUpsertNestedInput
 }
 
-export interface PostCreateWithoutAuthorInput {
-  isPublished?: Boolean
-  title: String
-  text: String
+export interface UserWhereUniqueInput {
+  id?: ID_Input
+  login?: String
 }
 
 export interface UserWhereInput {
@@ -1959,145 +1123,14 @@ export interface UserWhereInput {
   role_not?: Role
   role_in?: Role[] | Role
   role_not_in?: Role[] | Role
-  posts_every?: PostWhereInput
-  posts_some?: PostWhereInput
-  posts_none?: PostWhereInput
 }
 
-export interface ApplicationWhereInput {
-  AND?: ApplicationWhereInput[] | ApplicationWhereInput
-  OR?: ApplicationWhereInput[] | ApplicationWhereInput
-  NOT?: ApplicationWhereInput[] | ApplicationWhereInput
-  id?: ID_Input
-  id_not?: ID_Input
-  id_in?: ID_Input[] | ID_Input
-  id_not_in?: ID_Input[] | ID_Input
-  id_lt?: ID_Input
-  id_lte?: ID_Input
-  id_gt?: ID_Input
-  id_gte?: ID_Input
-  id_contains?: ID_Input
-  id_not_contains?: ID_Input
-  id_starts_with?: ID_Input
-  id_not_starts_with?: ID_Input
-  id_ends_with?: ID_Input
-  id_not_ends_with?: ID_Input
-  name?: String
-  name_not?: String
-  name_in?: String[] | String
-  name_not_in?: String[] | String
-  name_lt?: String
-  name_lte?: String
-  name_gt?: String
-  name_gte?: String
-  name_contains?: String
-  name_not_contains?: String
-  name_starts_with?: String
-  name_not_starts_with?: String
-  name_ends_with?: String
-  name_not_ends_with?: String
-  isSystem?: Boolean
-  isSystem_not?: Boolean
-  path?: String
-  path_not?: String
-  path_in?: String[] | String
-  path_not_in?: String[] | String
-  path_lt?: String
-  path_lte?: String
-  path_gt?: String
-  path_gte?: String
-  path_contains?: String
-  path_not_contains?: String
-  path_starts_with?: String
-  path_not_starts_with?: String
-  path_ends_with?: String
-  path_not_ends_with?: String
-  description?: String
-  description_not?: String
-  description_in?: String[] | String
-  description_not_in?: String[] | String
-  description_lt?: String
-  description_lte?: String
-  description_gt?: String
-  description_gte?: String
-  description_contains?: String
-  description_not_contains?: String
-  description_starts_with?: String
-  description_not_starts_with?: String
-  description_ends_with?: String
-  description_not_ends_with?: String
-  repository?: String
-  repository_not?: String
-  repository_in?: String[] | String
-  repository_not_in?: String[] | String
-  repository_lt?: String
-  repository_lte?: String
-  repository_gt?: String
-  repository_gte?: String
-  repository_contains?: String
-  repository_not_contains?: String
-  repository_starts_with?: String
-  repository_not_starts_with?: String
-  repository_ends_with?: String
-  repository_not_ends_with?: String
-}
-
-export interface UserCreateOneWithoutPostsInput {
-  create?: UserCreateWithoutPostsInput
-  connect?: UserWhereUniqueInput
-}
-
-export interface PostCreateInput {
-  isPublished?: Boolean
-  title: String
-  text: String
-  author: UserCreateOneWithoutPostsInput
-}
-
-export interface UserCreateInput {
-  login: String
-  name: String
-  password: String
-  role?: Role
-  posts?: PostCreateManyWithoutAuthorInput
-}
-
-export interface PostCreateManyWithoutAuthorInput {
-  create?: PostCreateWithoutAuthorInput[] | PostCreateWithoutAuthorInput
-  connect?: PostWhereUniqueInput[] | PostWhereUniqueInput
-}
-
-export interface PostUpsertWithWhereUniqueWithoutAuthorInput {
-  where: PostWhereUniqueInput
-  update: PostUpdateWithoutAuthorDataInput
-  create: PostCreateWithoutAuthorInput
-}
-
-export interface UserSubscriptionWhereInput {
-  AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
-  OR?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
-  NOT?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: UserWhereInput
-}
-
-export interface ApplicationWhereUniqueInput {
-  id?: ID_Input
-  path?: String
-}
-
-export interface ApplicationSubscriptionWhereInput {
-  AND?: ApplicationSubscriptionWhereInput[] | ApplicationSubscriptionWhereInput
-  OR?: ApplicationSubscriptionWhereInput[] | ApplicationSubscriptionWhereInput
-  NOT?: ApplicationSubscriptionWhereInput[] | ApplicationSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: ApplicationWhereInput
+export interface HostUpdateManyInput {
+  hostName?: String
+  password?: String
+  publicKey?: String
+  timeZone?: String
+  tunnelPort?: Int
 }
 
 /*
@@ -2108,49 +1141,18 @@ export interface Node {
   id: ID_Output
 }
 
-export interface AggregateApplication {
+export interface AggregateUser {
   count: Int
-}
-
-export interface User extends Node {
-  id: ID_Output
-  login: String
-  name: String
-  password: String
-  role?: Role
-  posts?: Post[]
-}
-
-export interface ApplicationPreviousValues {
-  id: ID_Output
-  name: String
-  isSystem?: Boolean
-  path?: String
-  description?: String
-  repository?: String
-}
-
-export interface BatchPayload {
-  count: Long
 }
 
 /*
  * A connection to a list of items.
 
  */
-export interface ApplicationConnection {
+export interface HostConnection {
   pageInfo: PageInfo
-  edges: ApplicationEdge[]
-  aggregate: AggregateApplication
-}
-
-/*
- * An edge in a connection.
-
- */
-export interface ApplicationEdge {
-  node: Application
-  cursor: String
+  edges: HostEdge[]
+  aggregate: AggregateHost
 }
 
 export interface HostSubscriptionPayload {
@@ -2160,8 +1162,56 @@ export interface HostSubscriptionPayload {
   previousValues?: HostPreviousValues
 }
 
+export interface BatchPayload {
+  count: Long
+}
+
+export interface UserPreviousValues {
+  id: ID_Output
+  login: String
+  name: String
+  password: String
+  role?: Role
+}
+
 export interface AggregateHost {
   count: Int
+}
+
+export interface HostPreviousValues {
+  id: ID_Output
+  hostName: String
+  password: String
+  publicKey?: String
+  timeZone: String
+  tunnelPort?: Int
+}
+
+export interface Host extends Node {
+  id: ID_Output
+  hostName: String
+  password: String
+  publicKey?: String
+  owner?: User
+  timeZone: String
+  tunnelPort?: Int
+}
+
+export interface User extends Node {
+  id: ID_Output
+  login: String
+  name: String
+  password: String
+  role?: Role
+}
+
+/*
+ * An edge in a connection.
+
+ */
+export interface UserEdge {
+  node: User
+  cursor: String
 }
 
 /*
@@ -2177,40 +1227,10 @@ export interface HostEdge {
  * A connection to a list of items.
 
  */
-export interface HostConnection {
+export interface UserConnection {
   pageInfo: PageInfo
-  edges: HostEdge[]
-  aggregate: AggregateHost
-}
-
-/*
- * An edge in a connection.
-
- */
-export interface UserEdge {
-  node: User
-  cursor: String
-}
-
-export interface Post extends Node {
-  id: ID_Output
-  createdAt: DateTime
-  updatedAt: DateTime
-  isPublished: Boolean
-  title: String
-  text: String
-  author: User
-}
-
-export interface AggregatePost {
-  count: Int
-}
-
-export interface ApplicationSubscriptionPayload {
-  mutation: MutationType
-  node?: Application
-  updatedFields?: String[]
-  previousValues?: ApplicationPreviousValues
+  edges: UserEdge[]
+  aggregate: AggregateUser
 }
 
 /*
@@ -2224,95 +1244,11 @@ export interface PageInfo {
   endCursor?: String
 }
 
-export interface PostSubscriptionPayload {
-  mutation: MutationType
-  node?: Post
-  updatedFields?: String[]
-  previousValues?: PostPreviousValues
-}
-
-export interface Application extends Node {
-  id: ID_Output
-  name: String
-  isSystem?: Boolean
-  path?: String
-  description?: String
-  repository?: String
-}
-
-export interface AggregateUser {
-  count: Int
-}
-
-export interface UserPreviousValues {
-  id: ID_Output
-  login: String
-  name: String
-  password: String
-  role?: Role
-}
-
 export interface UserSubscriptionPayload {
   mutation: MutationType
   node?: User
   updatedFields?: String[]
   previousValues?: UserPreviousValues
-}
-
-export interface HostPreviousValues {
-  id: ID_Output
-  hostName: String
-  password: String
-  publicKey?: String
-  timeZone: String
-  tunnelPort?: Int
-}
-
-export interface PostPreviousValues {
-  id: ID_Output
-  createdAt: DateTime
-  updatedAt: DateTime
-  isPublished: Boolean
-  title: String
-  text: String
-}
-
-/*
- * A connection to a list of items.
-
- */
-export interface UserConnection {
-  pageInfo: PageInfo
-  edges: UserEdge[]
-  aggregate: AggregateUser
-}
-
-export interface Host extends Node {
-  id: ID_Output
-  hostName: String
-  password: String
-  publicKey?: String
-  timeZone: String
-  tunnelPort?: Int
-}
-
-/*
- * A connection to a list of items.
-
- */
-export interface PostConnection {
-  pageInfo: PageInfo
-  edges: PostEdge[]
-  aggregate: AggregatePost
-}
-
-/*
- * An edge in a connection.
-
- */
-export interface PostEdge {
-  node: Post
-  cursor: String
 }
 
 /*
@@ -2328,11 +1264,9 @@ export type ID_Input = string | number
 export type ID_Output = string
 
 /*
-The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
+The `Boolean` scalar type represents `true` or `false`.
 */
-export type Int = number
-
-export type DateTime = Date | string
+export type Boolean = boolean
 
 /*
 The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
@@ -2340,6 +1274,6 @@ The `String` scalar type represents textual data, represented as UTF-8 character
 export type String = string
 
 /*
-The `Boolean` scalar type represents `true` or `false`.
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
 */
-export type Boolean = boolean
+export type Int = number

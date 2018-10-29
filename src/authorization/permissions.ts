@@ -1,4 +1,4 @@
-import { shield, and, or, not } from 'graphql-shield'
+import { shield, and, or, not, allow } from 'graphql-shield'
 import { isAuthenticated, isAdmin, isUser } from './rules';
 export default shield({
     Query: {
@@ -11,4 +11,8 @@ export default shield({
       upsertUser: isAdmin,
     },
     Host: isAuthenticated,
-  })
+  },
+  {
+    fallback: 'Not authorized',
+  },
+  )

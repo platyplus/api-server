@@ -1,0 +1,30 @@
+#endpoint: ${env:PRISMA_PROTOCOL}://${env:PRISMA_SERVER}/${env:PRISMA_SERVICE}/${env:PRISMA_STAGE}
+endpoint: https://eu1.prisma.sh/pilou-f64910/graphql-server-dummy/dev
+# The file containing the definition of your data model.
+datamodel: datamodel.graphql
+
+# Seed your service with initial data based on `seed.graphql`.
+seed:
+  import: seed.graphql
+
+generate:
+  - generator: typescript-client
+    output: ../src/generated/prisma-client/
+
+# Download the GraphQL schema of the Prisma API into
+# `src/generated/prisma.graphql` (as specfied in `.graphqlconfig.yml`).
+# Then generate the corresponding TypeScript definitions into
+# `src/generated/prisma.ts` (also specfied in `.graphqlconfig.yml`)
+# with `graphql codegen` .
+hooks:
+  post-deploy:
+    - graphql get-schema -p prisma
+    - graphql codegen
+
+# The secret is used to generate JWTs which allow to authenticate
+# against your Prisma service. You can use the `prisma token` command from the CLI
+# to generate a JWT based on the secret. When using the `prisma-binding` package,
+# you don't need to generate the JWTs manually as the library is doing that for you
+# (this is why you're passing it to the `Prisma` constructor).
+# Here, the secret is loaded as an environment variable from .env.
+secret: ${env:PRISMA_SECRET}

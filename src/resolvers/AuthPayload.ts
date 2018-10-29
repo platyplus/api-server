@@ -1,7 +1,12 @@
-import { Context } from '../utils'
+import { AuthPayloadResolvers } from '../generated/resolvers'
+import { TypeMap } from './types/TypeMap'
 
-export const AuthPayload = {
-  user: async ({ user: { id } }, args, ctx: Context, info) => {
-    return ctx.db.query.user({ where: { id } }, info)
-  },
+export interface AuthPayloadParent {
+  id: string
+  token: string
+}
+
+export const AuthPayload: AuthPayloadResolvers.Type<TypeMap> = {
+  token: parent => parent.token,
+  user: (parent, _args, ctx) => ctx.db.user({ id: parent.id }),
 }

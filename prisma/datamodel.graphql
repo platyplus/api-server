@@ -1,0 +1,31 @@
+enum Role {
+  ADMIN
+  USER
+}
+
+type User {
+  id: ID! @unique
+  login: String! @unique
+  name: String!
+  password: String!
+  role: Role @default(value: USER)
+}
+
+type Host {
+  id: ID! @unique
+  hostName: String! @unique
+  password: String!
+  publicKey: String
+  owner: User
+  timeZone: String! @default(value: "Europe/Brussels")
+  tunnelPort: Int
+}
+
+# type Application {
+#   id: ID! @unique
+#   name: String!
+#   isSystem: Boolean
+#   path: String @unique
+#   description: String
+#   repository: String
+# }

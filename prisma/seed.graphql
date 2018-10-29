@@ -4,13 +4,6 @@ mutation {
     password: "$2a$10$hACwQ5/HQI6FhbIISOUVeusy3sKyUDhSq36fF5d/54aAdiygJPFzm" # plaintext password: "nooneknows"
     name: "Pilou"
     role: ADMIN
-    posts: {
-      create: [{
-        title: "Hello World 👋"
-        text: "I like turtles."
-        isPublished: true
-      }]
-    }
   }) {
     id
   }
@@ -18,13 +11,6 @@ mutation {
     login: "rosalie@pilou.com"
     password: "$2a$10$hACwQ5/HQI6FhbIISOUVeusy3sKyUDhSq36fF5d/54aAdiygJPFzm" # plaintext password: "nooneknows"
     name: "Rosalie"
-    posts: {
-      create: [{
-        title: "Un billet magnifique"
-        text: "J'aime bien mon prénom"
-        isPublished: false
-      }]
-    }
   }) {
     id
   }
